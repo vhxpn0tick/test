@@ -1,0 +1,32 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "name": "Velaryon Hosting",
+            "url": "https://velaryonhosting.fr",
+            "logo": "https://velaryonhosting.fr/Valeryon.png"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type":"ListItem","position":1,"name":"Accueil","item":"https://velaryonhosting.fr/"},
+                {"@type":"ListItem","position":2,"name":"VPS","item":"https://velaryonhosting.fr/vps.html"}
+            ]
+        },
+        {
+            "@type": "Product",
+            "name": "VPS-Micro",
+            "description": "Entrée de gamme, idéal pour petits projets.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"4.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/vps/vps-micro","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"vps-micro"}
+        },
+        {
+            "@type": "Product",
+            "name": "VPS-Tiny",
+            "description": "Un petit cran au-dessus pour plus de confort.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"6.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/vps/vps-tiny","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"vps-tiny"}
+        }
+    ]
+}

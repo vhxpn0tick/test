@@ -1,0 +1,21 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Comment commander un serveur de jeu ?",
+            "acceptedAnswer": {"@type":"Answer","text":"Cliquez sur le bouton Commander pour une offre, vous serez redirigé vers notre boutique sécurisée pour finaliser l'achat."}
+        },
+        {
+            "@type": "Question",
+            "name": "Puis-je changer la configuration après achat ?",
+            "acceptedAnswer": {"@type":"Answer","text":"Oui, la plupart des offres permettent des upgrades depuis le panel ou via notre support."}
+        },
+        {
+            "@type": "Question",
+            "name": "Quel est le SLA / uptime ?",
+            "acceptedAnswer": {"@type":"Answer","text":"Nous garantissons un uptime de 99.9% sur nos offres standards ; contactez le support pour les offres pro."}
+        }
+    ]
+}

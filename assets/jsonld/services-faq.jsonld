@@ -1,0 +1,9 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {"@type":"Question","name":"Qu'est-ce inclus dans l'hébergement WordPress ?","acceptedAnswer":{"@type":"Answer","text":"Themes et plugins de base, mises à jour automatiques et optimisations de performance pour WordPress."}},
+        {"@type":"Question","name":"Proposez-vous des sauvegardes ?","acceptedAnswer":{"@type":"Answer","text":"Oui, les sauvegardes automatiques sont disponibles en option et peuvent être activées depuis le panel."}},
+        {"@type":"Question","name":"Comment contacter le support ?","acceptedAnswer":{"@type":"Answer","text":"Par email à contact@velaryonhosting.fr ou via notre Discord; support 24/7 pour les offres dédiées."}}
+    ]
+}

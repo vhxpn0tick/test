@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://velaryonhosting.fr/sitemap.xml

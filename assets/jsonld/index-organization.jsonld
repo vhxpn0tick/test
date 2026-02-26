@@ -1,0 +1,16 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Velaryon Hosting",
+    "url": "https://velaryonhosting.fr",
+    "logo": "https://velaryonhosting.fr/assets/images/logo.png",
+    "description": "Velaryon Hosting propose des solutions d'hébergement web, cloud privé sécurisé, VPS gaming et hébergement WordPress.",
+    "contactPoint": [
+        {
+            "@type": "ContactPoint",
+            "telephone": "+33-7-69-65-70-67",
+            "contactType": "customer service",
+            "availableLanguage": ["French"]
+        }
+    ]
+}

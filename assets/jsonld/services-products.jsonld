@@ -1,0 +1,46 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "name": "Velaryon Hosting",
+            "url": "https://velaryonhosting.fr",
+            "logo": "https://velaryonhosting.fr/Valeryon.png"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type":"ListItem","position":1,"name":"Accueil","item":"https://velaryonhosting.fr/"},
+                {"@type":"ListItem","position":2,"name":"Services","item":"https://velaryonhosting.fr/services.html"}
+            ]
+        },
+        {
+            "@type": "Product",
+            "name": "Cloud Classic",
+            "description": "Offre Cloud d'entrée de gamme, idéale pour sites et petites applications.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"6.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/service/offre-cloud-classic","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"cloud-classic"}
+        },
+        {
+            "@type": "Product",
+            "name": "Cloud Pro",
+            "description": "Offre Cloud performante pour applications et serveurs exigeants.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"13.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/service/offre-cloud-pro"}
+        },
+        {
+            "@type": "Product",
+            "name": "Hébergement Web",
+            "description": "Hébergement performant pour vos sites web. Vitesse et fiabilité garanties.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"2.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/service/herbergement-web"}
+        },
+        {
+            "@type": "Product",
+            "name": "Hébergement WordPress",
+            "description": "Optimisé pour WordPress avec thèmes et plugins préinstallés.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"4.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/service/hebergement-wordpress","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"hebergement-wordpress"}
+        }
+    ]
+}

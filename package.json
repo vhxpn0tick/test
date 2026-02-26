@@ -1,0 +1,17 @@
+{
+  "name": "velaryon-site-utils",
+  "version": "1.0.0",
+  "description": "Utilities for optimizing Velaryon static site (image generation, audits)",
+  "scripts": {
+    "images:generate": "node tools/image-gen.js",
+    "lighthouse:audit": "lighthouse http://localhost:3000 --output=json --output-path=reports/lighthouse.json --chrome-flags='--headless' || true",
+  "build:js": "node tools/build.js"
+  },
+  "dependencies": {
+    "sharp": "^0.32.0",
+    "lighthouse": "^11.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.19"
+  }
+}

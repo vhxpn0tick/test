@@ -1,0 +1,9 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {"@type":"Question","name":"Quelle configuration pour jouer en low-lag ?","acceptedAnswer":{"@type":"Answer","text":"Privilégiez un VPS avec plus de vCPU et RAM ; nos offres Standard et Pro sont recommandées pour du gaming intensif."}},
+        {"@type":"Question","name":"Puis-je sauvegarder automatiquement ?","acceptedAnswer":{"@type":"Answer","text":"Oui, nous proposons des snapshots et sauvegardes automatiques en option pour toutes les offres."}},
+        {"@type":"Question","name":"Comment migrer mon serveur existant ?","acceptedAnswer":{"@type":"Answer","text":"Contactez le support pour une assistance de migration ; nous proposons des services de migration managés."}}
+    ]
+}

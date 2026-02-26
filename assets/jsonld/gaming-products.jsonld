@@ -1,0 +1,60 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "name": "Velaryon Hosting",
+            "url": "https://velaryonhosting.fr",
+            "logo": "https://velaryonhosting.fr/Valeryon.png"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://velaryonhosting.fr/"},
+                {"@type": "ListItem", "position": 2, "name": "Jeux", "item": "https://velaryonhosting.fr/gaming.html"}
+            ]
+        },
+        {
+            "@type": "Product",
+            "name": "Rust Bronze",
+            "description": "Serveur Rust basique — idéal pour petits serveurs PvP.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"4.50","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/offres-rust/offre-rust-bronze","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"offre-rust-bronze"}
+        },
+        {
+            "@type": "Product",
+            "name": "Rust Argent",
+            "description": "Plus de ressources pour communautés actives.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"9.50","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/offres-rust/offre-rust-argent","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"offre-rust-argent"}
+        },
+        {
+            "@type": "Product",
+            "name": "Rust Or",
+            "description": "Configuration haut de gamme pour gros serveurs Rust.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"13.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/offres-rust/offre-rust-or","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"offre-rust-or"}
+        },
+        {
+            "@type": "Product",
+            "name": "Minecraft Vanilla",
+            "description": "Serveur Vanilla optimisé pour stabilité.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"3.50","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/offres-minecraft/offre-vanilla","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"offre-vanilla"}
+        },
+        {
+            "@type": "Product",
+            "name": "Minecraft Iron",
+            "description": "Idéal pour serveurs moddés et petites communautés.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"4.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/offres-minecraft/offre-iron","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"offre-iron"}
+        },
+        {
+            "@type": "Product",
+            "name": "Minecraft Diamant",
+            "description": "Performances élevées pour grandes communautés.",
+            "brand": {"@type":"Organization","name":"Velaryon Hosting"},
+            "offers": {"@type":"Offer","price":"13.99","priceCurrency":"EUR","url":"https://achat.velaryonhosting.fr/products/offres-minecraft/offre-diamant","availability":"http://schema.org/InStock","priceValidUntil":"2026-12-31","sku":"offre-diamant"}
+        }
+    ]
+}

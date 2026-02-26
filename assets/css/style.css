@@ -1,0 +1,2452 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color palette */
+    --vel-bg: #0f0f11; /* page background darker */
+    --vel-surface: #1b1b1d; /* cards / surfaces */
+    --vel-muted: #bfbfbf; /* muted text */
+    --vel-text: #e6e6e6; /* primary text */
+    --vel-primary: #bb86fc; /* violet */
+    --vel-accent: #ffd166; /* warm gold (slightly softer than pure #FFD700) */
+    --vel-gradient: linear-gradient(90deg,var(--vel-primary),var(--vel-accent));
+    --vel-radius-sm: 6px;
+    --vel-radius-md: 12px;
+    --vel-radius-lg: 18px;
+    --vel-shadow-sm: 0 6px 14px rgba(0,0,0,0.45);
+    --vel-shadow-md: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--vel-text);
+    background-color: var(--vel-bg);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Utility to replace inline style="display:none" uses and allow CSP-safe visibility toggling */
+.hidden { display: none !important; }
+
+/* Theme utilities */
+.vel-gradient {
+    background: var(--vel-gradient) !important;
+}
+.vel-btn {
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    font-weight: 800;
+    border: none;
+    border-radius: var(--vel-radius-md);
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    box-shadow: var(--vel-shadow-sm);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.12s ease;
+}
+.vel-btn:hover { transform: translateY(-2px); box-shadow: var(--vel-shadow-md); }
+.vel-surface {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+    background-color: var(--vel-surface);
+    border-radius: var(--vel-radius-md);
+    box-shadow: var(--vel-shadow-sm);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Global element normalizations to enforce consistent radius, color and spacing */
+header, .modal-content, .pricing-card, .advantage, .service, .game-card, .individual-services .service {
+    border-radius: var(--vel-radius-md) !important;
+}
+.game-card, .pricing-card, .advantage, .service {
+    background: var(--vel-surface) !important;
+    color: var(--vel-text) !important;
+}
+
+/* Buttons & CTAs */
+.cta-button, .login-btn, .game-card .cta-btn, .tab-content button, .discord-auth-btn {
+    border-radius: var(--vel-radius-md) !important;
+}
+
+/* Inputs */
+input, select, textarea {
+    background: #0f0f11;
+    border: 1px solid rgba(255,255,255,0.04);
+    color: var(--vel-text);
+    border-radius: var(--vel-radius-sm);
+    padding: 0.5rem;
+}
+
+/* Accent helpers */
+.accent-text { color: var(--vel-primary) !important; }
+.accent-gold { color: var(--vel-accent) !important; }
+
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(187, 134, 252, 0.3) 0%, rgba(255, 215, 0, 0.15) 50%, transparent 100%);
+    box-shadow: 0 0 30px rgba(187, 134, 252, 0.4);
+    animation: float 40s infinite ease-in-out, pulse 8s infinite ease-in-out;
+}
+
+.circle1 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: 10%;
+    animation-duration: 40s, 8s;
+    animation-delay: 0s, 0s;
+}
+
+.circle2 {
+    width: 180px;
+    height: 180px;
+    top: 50%;
+    left: 70%;
+    animation-duration: 50s, 10s;
+    animation-delay: 5s, 1s;
+}
+
+.circle3 {
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    left: 20%;
+    animation-duration: 35s, 7s;
+    animation-delay: 10s, 2s;
+}
+
+.circle4 {
+    width: 150px;
+    height: 150px;
+    top: 30%;
+    left: 50%;
+    animation-duration: 55s, 11s;
+    animation-delay: 15s, 3s;
+}
+
+.circle5 {
+    width: 110px;
+    height: 110px;
+    top: 70%;
+    left: 80%;
+    animation-duration: 45s, 9s;
+    animation-delay: 20s, 4s;
+}
+
+.circle6 {
+    width: 90px;
+    height: 90px;
+    top: 20%;
+    left: 80%;
+    animation-duration: 38s, 7.5s;
+    animation-delay: 8s, 0.5s;
+}
+
+.circle7 {
+    width: 140px;
+    height: 140px;
+    top: 60%;
+    left: 10%;
+    animation-duration: 52s, 10.5s;
+    animation-delay: 12s, 1.5s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg) translateX(0px);
+    }
+    25% {
+        transform: translateY(-80px) rotate(90deg) translateX(50px);
+    }
+    50% {
+        transform: translateY(-40px) rotate(180deg) translateX(-30px);
+    }
+    75% {
+        transform: translateY(-100px) rotate(270deg) translateX(70px);
+    }
+    100% {
+        transform: translateY(0px) rotate(360deg) translateX(0px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Reduce heavy animated background on mobile and for users who prefer reduced motion
+   This lowers CPU work & reduces layout shifts impacting Core Web Vitals. */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+    .animated-bg { display: none !important; }
+    .circle { animation: none !important; }
+}
+
+/* Login Button */
+.login-btn {
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--vel-radius-md);
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: var(--vel-shadow-sm);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vel-shadow-md);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #1e1e1e;
+    margin: 15% auto;
+    padding: 2rem;
+    border: 1px solid #333;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    color: white;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: white;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-btn.active {
+    background: #bb86fc;
+}
+
+.tab-content {
+    margin-bottom: 1rem;
+}
+
+.tab-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-content label {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.tab-content input {
+    padding: 0.5rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: white;
+}
+
+.tab-content button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: #bb86fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tab-content button:hover {
+    background: #a76bfa;
+}
+
+.divider {
+    text-align: center;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #555;
+}
+
+.divider {
+    background: #1e1e1e;
+    padding: 0 1rem;
+    z-index: 1;
+    position: relative;
+}
+
+.discord-auth-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: #5865f2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.discord-auth-btn:hover {
+    background: #4752c4;
+}
+
+h1, h2, h3, h4 {
+    color: #ffffff;
+}
+
+a {
+    color: #bb86fc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3700b3;
+}
+
+/* Header */
+header {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.1);
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    color: white;
+    font-weight: bold;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo a:hover {
+    color: #bb86fc;
+}
+
+.discord-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #bb86fc !important;
+    transition: color 0.3s ease;
+}
+
+.discord-link:hover {
+    color: #FFD700 !important;
+}
+
+.discord-link svg {
+    fill: currentColor;
+}
+
+/* Main Content */
+main {
+    /* Augmenté pour compenser la hauteur du header fixe sur petits et grands écrans */
+    margin-top: 110px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    color: white;
+    padding: 5rem 2rem 3rem; /* un peu plus d'espace en haut pour séparer du header */
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button.primary {
+    background-color: #bb86fc;
+    color: #121212;
+    font-weight: bold;
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: #bb86fc;
+    border: 2px solid #bb86fc;
+}
+
+.cta-button.secondary:hover {
+    background-color: #bb86fc;
+    color: #121212;
+}
+
+/* Advantages Section */
+.advantages {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advantages h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.advantage {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.advantage:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.advantage h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Pricing Preview */
+.pricing-preview {
+    background-color: #1a1a1a;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.pricing-preview h2 {
+    margin-bottom: 2rem;
+}
+
+.pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.pricing-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 300px;
+    border: 1px solid #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.pricing-card h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 2rem;
+    color: #bb86fc;
+    margin-bottom: 1rem;
+}
+
+.pricing-card ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+/* Gaming Servers */
+.gaming-servers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.game-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+.game-card p {
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.game-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.game-card li {
+    margin-bottom: 0.5rem;
+    color: #ccc;
+}
+
+.game-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #bb86fc;
+    margin: 1rem 0;
+}
+
+.game-card .cta-btn {
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--vel-radius-md);
+    cursor: pointer;
+    font-weight: 800;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: var(--vel-shadow-sm);
+}
+
+.game-card .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vel-shadow-md);
+}
+
+.game-card.custom {
+    border: 2px solid #FFD700;
+}
+
+/* Enhanced gaming-plans card styles (inspired by the provided mock) */
+.gaming-plans .game-card {
+    max-width: 360px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #0b0d0d 0%, #121214 100%);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.gaming-plans .game-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.gaming-plans .game-image {
+    width: 72px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.stock-badge {
+    position: absolute;
+    right: 0.25rem;
+    top: -6px;
+    background: #10b981; /* green */
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(16,185,129,0.14);
+}
+
+.gaming-plans .game-card h3 {
+    color: #bb86fc;
+    margin: 0.5rem 0 0.25rem 0;
+    font-size: 1.05rem;
+}
+
+.gaming-plans .game-card .price {
+    font-size: 2.25rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0.5rem 0 0.25rem 0;
+    font-weight: 800;
+}
+
+.gaming-plans .game-card .price .period {
+    display: block;
+    font-size: 0.85rem;
+    color: #bdbdbd;
+    font-weight: 600;
+}
+
+.gaming-plans .game-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0.8rem 0 1rem 0;
+}
+
+.gaming-plans .game-specs span {
+    display: block;
+    background: #0f0f11;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.02);
+    color: #cfcfcf;
+    font-size: 0.95rem;
+}
+
+.gaming-plans .game-card .cta-btn {
+    width: 100%;
+    padding: 0.95rem;
+    border-radius: var(--vel-radius-md);
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: var(--vel-shadow-sm);
+}
+
+.gaming-plans .game-card .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vel-shadow-md);
+}
+
+@media (max-width: 900px) {
+    .gaming-offers .offer-grid, .gaming-plans {
+        grid-template-columns: 1fr !important;
+    }
+    .gaming-plans .game-card {
+        max-width: 100%;
+    }
+}
+
+/* Pricing Table */
+.pricing-table {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pricing-table h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pricing-table p {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.individual-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.service {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    text-align: center;
+}
+
+.service h3 {
+    color: #bb86fc;
+    margin-bottom: 1rem;
+}
+
+.service p {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.service ul {
+    list-style: none;
+    text-align: left;
+}
+
+.pricing-table h2 {
+    text-align: center;
+    margin: 2rem 0 1rem 0;
+}
+
+.pricing-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.pricing-table th, .pricing-table td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.pricing-table th {
+    background-color: #2d2d2d;
+    color: white;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Guarantees */
+.guarantees {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.guarantees h2 {
+    margin-bottom: 2rem;
+}
+
+.guarantees ul {
+    list-style: none;
+    padding: 0;
+}
+
+.guarantees li {
+    background: #1e1e1e;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+/* FAQ */
+.faq {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.faq-item {
+    margin-bottom: 2rem;
+}
+
+.faq-item h3 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+/* About Sections */
+.about-hero {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.about-hero h1 {
+    margin-bottom: 1rem;
+}
+
+.about-hero p {
+    margin-bottom: 2rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #bb86fc;
+}
+
+.stat h3 {
+    color: #bb86fc;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    color: #e0e0e0;
+}
+
+.story, .vision-mission, .commitment, .infrastructure, .team {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story:hover, .vision-mission:hover, .commitment:hover, .infrastructure:hover, .team:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.story h2, .vision-mission h2, .commitment h2, .infrastructure h2, .team h2 {
+    margin-bottom: 1rem;
+    color: #FFD700;
+    font-size: 1.5rem;
+}
+
+.story {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+}
+
+.vision-mission {
+    background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+}
+
+.commitment {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+}
+
+.infrastructure {
+    background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+}
+
+.team {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+}
+
+/* Footer */
+footer {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+/* Trust badges (homepage) */
+.trust-badges {
+    padding: 3rem 1rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+}
+
+.trust-badges h2 {
+    text-align: center;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+}
+
+.trust-badges .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.25rem;
+    justify-content: center;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.trust-badges .badge {
+    background: linear-gradient(135deg, #1b1b1b 0%, #2a2a2a 100%);
+    color: #eaeaea;
+    padding: 0.65rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    min-width: 160px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.trust-badges .badge:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.6);
+}
+
+@media (max-width: 600px) {
+    .trust-badges .badge {
+        min-width: 45%;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.95rem;
+    }
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    flex-wrap: wrap;
+}
+
+/* Gaming Offers Section */
+.gaming-offers {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.gaming-offers h2 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.gaming-offers p {
+    color: #e0e0e0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.plan-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    text-align: left;
+}
+
+.plan-card h3 {
+    color: #bb86fc;
+    margin-bottom: 0.5rem;
+}
+
+.plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.plan-card li {
+    color: #d0d0d0;
+    margin-bottom: 0.5rem;
+}
+
+.plan-card.evolved h3 { color: #FFD700; }
+
+.plan-card .cta-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.gaming-offers .note {
+    margin-top: 1rem;
+    color: #bdbdbd;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* Per-game offer layout */
+.game-offer {
+    background: linear-gradient(135deg, rgba(30,30,30,0.6) 0%, rgba(40,40,40,0.6) 100%);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #2b2b2b;
+}
+
+.game-offer h3 {
+    color: #FFD700;
+    margin: 0 0 0.75rem 0;
+}
+
+.offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.offer-grid .plan-card {
+    padding: 1rem;
+}
+
+.offer-grid .plan-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: #bb86fc;
+}
+
+.offer-grid .plan-card.evolved h4 { color: #FFD700; }
+
+@media (max-width: 900px) {
+    .offer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Contact page layout and form styles */
+.contact-hero {
+    padding: 4rem 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 1.5rem auto 3rem;
+    padding: 0 2rem;
+    align-items: start;
+}
+
+.contact-info {
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.contact-form {
+    background: rgba(30,30,30,0.6);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+
+.contact-form h2 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+#contact-form label {
+    display: block;
+    margin-top: 0.6rem;
+    color: #ddd;
+    font-size: 0.95rem;
+}
+
+#contact-form input,
+#contact-form select,
+#contact-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.25rem;
+    background: #121212;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+#contact-form textarea { resize: vertical; }
+
+#contact-form button {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #bb86fc 0%, #FFD700 100%);
+    color: #121212;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
+
+.footer-section {
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Index Page Modern Styles */
+.features {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features h2 {
+    color: #FFD700;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.feature-card {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.feature-card h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.feature-card p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.services-overview {
+    padding: 4rem 2rem;
+    background: rgba(20, 20, 20, 0.8);
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-bottom: 4rem;
+}
+
+.services-overview h2 {
+    color: #FFD700;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.services-overview > p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* make groups full width so internal cards can lay out horizontally */
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.service-overview-card {
+    background: rgba(40, 40, 40, 0.9);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.service-overview-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(187, 134, 252, 0.6);
+    box-shadow: 0 15px 30px rgba(187, 134, 252, 0.2);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.service-overview-card h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.service-overview-card p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.service-link {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.service-link:hover {
+    color: #ffffff;
+}
+
+.services-cta {
+    margin-top: 3rem;
+}
+
+.services-cta p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+/* About Page Modern Styles */
+.about-content {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.about-card {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid rgba(187, 134, 252, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(187, 134, 252, 0.5);
+    box-shadow: 0 20px 40px rgba(187, 134, 252, 0.1);
+}
+
+.about-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-align: center;
+}
+
+.about-card h3 {
+    color: #FFD700;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.about-card p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.vision-mission-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.vision-item,
+.mission-item {
+    background: rgba(50, 50, 50, 0.5);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #FFD700;
+}
+
+.vision-item h4,
+.mission-item h4 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.security-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.feature-tag {
+    background: rgba(187, 134, 252, 0.2);
+    color: #FFD700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+}
+
+.specs-highlight {
+    background: rgba(20, 20, 20, 0.8);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.spec-label {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.spec-value {
+    color: #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+    }
+
+    nav ul li {
+        margin-left: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .features-grid,
+    .services-grid,
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .features h2,
+    .services-overview h2 {
+        font-size: 2rem;
+    }
+
+    .feature-card,
+    .service-overview-card,
+    .about-card {
+        padding: 2rem;
+    }
+
+    .vision-mission-content {
+        gap: 1rem;
+    }
+
+    .security-features {
+        justify-content: flex-start;
+    }
+
+    .gaming-plans h2,
+    .specifications h2 {
+        font-size: 2rem;
+    }
+
+    .gaming-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .gaming-hero p {
+        font-size: 1.1rem;
+    }
+
+    .panel-features h2 {
+        font-size: 2rem;
+    }
+
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Simplified Gaming Page Styles */
+.gaming-plans {
+    display: grid;
+    /* make each game-group span full width so internal .vps-plans can layout horizontally */
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+    max-width: 1200px;
+    margin: 2.5rem auto;
+    padding: 0 2rem;
+}
+
+/* Ensure the heading and the vps-plans block span full width so vps-plans' flex layout controls card layout */
+.gaming-plans > h2,
+.gaming-plans > .vps-plans {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+/* Grouping helpers for games and services */
+.game-group, .service-group {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    border-radius: 12px;
+    padding: 1rem 1rem 1.25rem 1rem;
+    margin-bottom: 1.75rem;
+    border: 1px solid rgba(255,255,255,0.02);
+}
+.group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+.group-header h3 {
+    color: var(--vel-accent);
+    font-size: 1.25rem;
+    margin: 0;
+}
+.group-sub { color: #bdbdbd; font-size: 0.95rem; }
+.game-group .vps-plans, .service-group .vps-plans {
+    padding-top: 0.5rem;
+}
+
+/* Force horizontal layout and uniform sizing inside service groups */
+.service-group .vps-plans {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+.service-group .vps-plans > .vps-card {
+    flex: 0 1 320px;
+}
+
+.game-header {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.game-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-image {
+    transform: scale(1.05);
+}
+
+/* Banner used when no image files are available: gradient + title/subtitle */
+.game-banner {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    color: #fff;
+}
+.game-banner .banner-inner {
+    padding: 1rem 1.5rem;
+}
+.game-banner .banner-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #FFD700;
+    margin-bottom: 0.25rem;
+}
+.game-banner .banner-sub {
+    display: block;
+    color: #cfcfcf;
+    font-size: 0.95rem;
+}
+/* Per-game subtle gradient accents (fallbacks) */
+.game-banner[data-game="Rust"] { background: linear-gradient(90deg,#1f1a2b 0%, #2b1d2f 50%, rgba(255,215,0,0.08) 100%); }
+.game-banner[data-game="Minecraft"] { background: linear-gradient(90deg,#1b2a17 0%, #2f4b22 50%, rgba(255,215,0,0.06) 100%); }
+.game-banner[data-game="FiveM"] { background: linear-gradient(90deg,#13202b 0%, #273b44 50%, rgba(255,215,0,0.06) 100%); }
+.game-banner[data-game="Satisfactory"] { background: linear-gradient(90deg,#211b17 0%, #3a2f2a 50%, rgba(255,215,0,0.06) 100%); }
+.game-banner[data-game="DayZ"] { background: linear-gradient(90deg,#1f2326 0%, #2e3336 50%, rgba(255,215,0,0.06) 100%); }
+.game-banner[data-game="ARK"] { background: linear-gradient(90deg,#161b1d 0%, #243233 50%, rgba(255,215,0,0.06) 100%); }
+.game-banner[data-game="Autres"] { background: linear-gradient(90deg,#151515 0%, #2b2b2b 50%, rgba(255,215,0,0.04) 100%); }
+
+.game-banner:hover { transform: translateY(-4px); }
+
+/* Small emblem tile on the top-right of the banner (rounded thumbnail) */
+.banner-emblem {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 72px;
+    height: 44px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Fallback SVG-like backgrounds for each game emblem (no external images required) */
+.banner-emblem[data-emblem="rust"] {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%23b03d2e'/><text x='50%' y='60%' font-size='46' font-family='Arial' fill='%23ffffff' text-anchor='middle'>R</text></svg>");
+}
+.banner-emblem[data-emblem="minecraft"] {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%231e6b21'/><text x='50%' y='60%' font-size='46' font-family='Arial' fill='%23ffffff' text-anchor='middle'>M</text></svg>");
+}
+.banner-emblem[data-emblem="fivem"] {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%23162b33'/><text x='50%' y='60%' font-size='40' font-family='Arial' fill='%23ffffff' text-anchor='middle'>5M</text></svg>");
+}
+.banner-emblem[data-emblem="satisfactory"] {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%233a2f2a'/><text x='50%' y='60%' font-size='34' font-family='Arial' fill='%23ffffff' text-anchor='middle'>SF</text></svg>");
+}
+.banner-emblem[data-emblem="dayz"] {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%231f2326'/><text x='50%' y='60%' font-size='36' font-family='Arial' fill='%23ffffff' text-anchor='middle'>DZ</text></svg>");
+}
+.banner-emblem[data-emblem="ark"] {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%23161b1d'/><text x='50%' y='60%' font-size='36' font-family='Arial' fill='%23ffffff' text-anchor='middle'>ARK</text></svg>");
+}
+.banner-emblem[data-emblem="autres"] {
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+}
+
+/* small responsive tweak */
+@media (max-width: 900px) {
+    .banner-emblem { width: 56px; height: 36px; top: 10px; right: 10px; }
+}
+
+/* === Override with local image files (place your images in assets/images/) === */
+/* Banners (use .webp if available) */
+.game-banner[data-game="Rust"] { background-image: url("../images/rust-banner.webp"); background-size: cover; background-position: center center; }
+.game-banner[data-game="Minecraft"] { background-image: url("../images/minecraft-banner.webp"); background-size: cover; background-position: center center; }
+.game-banner[data-game="FiveM"] { background-image: url("../images/fivem-banner.webp"); background-size: cover; background-position: center center; }
+.game-banner[data-game="Satisfactory"] { background-image: url("../images/satisfactory-banner.webp"); background-size: cover; background-position: center center; }
+.game-banner[data-game="DayZ"] { background-image: url("../images/dayz-banner.webp"); background-size: cover; background-position: center center; }
+.game-banner[data-game="ARK"] { background-image: url("../images/ark-banner.webp"); background-size: cover; background-position: center center; }
+.game-banner[data-game="Autres"] { background-image: linear-gradient(135deg, #121212, #1f1f1f); background-size: cover; background-position: center center; }
+
+/* Emblems / thumbs (optional, use png or webp) */
+.banner-emblem[data-emblem="rust"] { background-image: url("../images/rust-thumb.png"); }
+.banner-emblem[data-emblem="minecraft"] { background-image: url("../images/minecraft-thumb.png"); }
+.banner-emblem[data-emblem="fivem"] { background-image: url("../images/fivem-thumb.png"); }
+.banner-emblem[data-emblem="satisfactory"] { background-image: url("../images/satisfactory-thumb.png"); }
+.banner-emblem[data-emblem="dayz"] { background-image: url("../images/dayz-thumb.png"); }
+.banner-emblem[data-emblem="ark"] { background-image: url("../images/ark-thumb.png"); }
+.banner-emblem[data-emblem="autres"] { background-image: none; }
+
+/* If you used .webp for thumbs, either rename to .png or update the rules above to .webp */
+
+/* Responsive image helper for banners when an <img> is used inside .game-banner */
+.game-banner img.game-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.stock-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #4CAF50;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.custom .stock-badge {
+    background: #FFD700;
+    color: #121212;
+}
+
+.game-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    justify-content: center;
+}
+
+.game-specs span {
+    background: rgba(187, 134, 252, 0.1);
+    color: #bb86fc;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+}
+
+.gaming-features {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin-top: 3rem;
+}
+
+.gaming-features h2 {
+    text-align: center;
+    color: #FFD700;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature h4 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.feature p {
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.custom-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #FFD700 0%, #bb86fc 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1rem;
+}
+
+/* VPS Page Styles */
+.vps-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin-bottom: 2rem;
+}
+
+.vps-hero h1 {
+    color: #FFD700;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.vps-hero p {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.vps-plans {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* stretch children so cards in the same row have equal height */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.vps-plans > .vps-card {
+    flex: 0 1 320px; /* preferred width, but allow shrink on smaller screens */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto; /* let flexbox compute row height */
+}
+
+.vps-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+    background-color: var(--vel-surface);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: left;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255,255,255,0.04); /* visible but subtle frame */
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* keep CTA at bottom */
+    min-height: 420px; /* baseline height for visual uniformity */
+}
+
+.vps-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--vel-primary) 0%, var(--vel-accent) 100%);
+}
+
+.vps-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+    border-color: rgba(187,134,252,0.6);
+}
+
+.vps-card.popular {
+    border-color: #FFD700;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.vps-card.popular::before {
+    background: linear-gradient(90deg, #FFD700 0%, #bb86fc 100%);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #FFD700 0%, #bb86fc 100%);
+    color: #121212;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vps-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.vps-header h3 {
+    color: #FFD700;
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.vps-icon {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.vps-description {
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.vps-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.spec {
+    background: rgba(187, 134, 252, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+.spec-label {
+    display: block;
+    color: #ccc;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.spec-value {
+    display: block;
+    color: #FFD700;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.vps-price {
+    margin-bottom: 2rem;
+}
+
+.price-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #bb86fc;
+}
+
+.price-period {
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.vps-card .cta-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #bb86fc 0%, #FFD700 100%);
+    color: #121212;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: auto; /* push CTA to the bottom when possible */
+}
+
+.vps-card .cta-btn:hover {
+    background: linear-gradient(135deg, #a76bfa 0%, #e6c200 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(187, 134, 252, 0.4);
+}
+
+.vps-addons {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin: 3rem 0;
+}
+
+.vps-addons h2 {
+    text-align: center;
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.vps-addons p {
+    text-align: center;
+    color: #e0e0e0;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.addon-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.addon-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.addon-card h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.addon-card p {
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.addon-price {
+    margin-bottom: 1.5rem;
+}
+
+.addon-price .price-amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.addon-price .price-period {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.addon-note {
+    color: #bb86fc;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: rgba(187, 134, 252, 0.1);
+    border-radius: 5px;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+}
+
+/* Services Page Styles */
+.services-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin-bottom: 2rem;
+}
+
+.services-hero h1 {
+    color: #FFD700;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.services-hero p {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* keep groups full width so .service-group internal .vps-plans can layout horizontally */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.service-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #333;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #bb86fc 0%, #FFD700 100%);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    border-color: #bb86fc;
+}
+
+.service-card.popular {
+    border-color: #FFD700;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.service-card.popular::before {
+    background: linear-gradient(90deg, #FFD700 0%, #bb86fc 100%);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #FFD700 0%, #bb86fc 100%);
+    color: #121212;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.service-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-header h3 {
+    color: #FFD700;
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.service-icon {
+    font-size: 3rem;
+    opacity: 0.9;
+}
+
+.service-description {
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.service-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(187, 134, 252, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+.feature-item .feature-icon {
+    font-size: 1.2rem;
+}
+
+.feature-item span:last-child {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+}
+
+.service-price {
+    margin-bottom: 2rem;
+}
+
+.service-price .price-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #bb86fc;
+}
+
+.service-price .price-period {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.service-price .price-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.service-card .cta-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #bb86fc 0%, #FFD700 100%);
+    color: #121212;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 auto;
+    display: block;
+}
+
+.service-card .cta-btn:hover {
+    background: linear-gradient(135deg, #a76bfa 0%, #e6c200 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(187, 134, 252, 0.4);
+}
+
+.service-card .cta-btn.secondary {
+    background: linear-gradient(135deg, #666 0%, #999 100%);
+    color: white;
+}
+
+.service-card .cta-btn.secondary:hover {
+    background: linear-gradient(135deg, #777 0%, #aaa 100%);
+}
+
+.services-features {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin-top: 3rem;
+}
+
+.services-features h2 {
+    text-align: center;
+    color: #FFD700;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature h4 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.feature p {
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.vps-features {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin-top: 3rem;
+}
+
+.vps-features h2 {
+    text-align: center;
+    color: #FFD700;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature h4 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.feature p {
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Ensure gaming page hero lines up with the plans grid */
+.gaming-hero {
+    padding: 4rem 2rem 1.5rem; /* top/right/left padding to align with other sections */
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+.gaming-hero p {
+    max-width: 900px;
+    margin-top: 0.5rem;
+    color: #d0d0d0;
+}
+
+/* Card size responsiveness and final tweaks */
+@media (max-width: 1100px) {
+    .vps-plans > .vps-card {
+        flex: 0 1 280px;
+    }
+}
+
+@media (max-width: 900px) {
+    /* stack cards vertically on small screens */
+    .vps-card {
+        min-height: 0;
+    }
+    /* keep two columns on narrow screens for better density (instead of forcing single column) */
+    .vps-plans > .vps-card {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
+}
+
+/* Optional: small visual tweak to group headers so cards look more uniform */
+.group-header h3 { font-size: 1.05rem; }
