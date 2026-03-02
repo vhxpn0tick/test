@@ -987,7 +987,7 @@ img, video, iframe { max-width: 100%; height: auto; }
     /* Collapse spec boxes into a single column to avoid horizontal pressure */
     .vps-specs {
         grid-template-columns: 1fr !important;
-        gap: 0.5rem !important;
+        gap: 0.9rem !important;
     }
 
     .spec { padding: 0.65rem !important; }
@@ -2196,7 +2196,7 @@ footer {
 .vps-specs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
@@ -2205,6 +2205,11 @@ footer {
     padding: 1rem;
     border-radius: 10px;
     border: 1px solid rgba(187, 134, 252, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem; /* horizontal space between label and value */
+    min-width: 0; /* prevent flex children from forcing overflow */
 }
 
 .spec-label {
@@ -2213,7 +2218,16 @@ footer {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0; /* no vertical gap when using horizontal layout */
+}
+
+/* If screen becomes very narrow, allow the label to stack above the value */
+@media (max-width: 420px) {
+    .vps-specs .spec {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+    }
 }
 
 .spec-value {
@@ -2731,3 +2745,55 @@ footer {
         height: auto;
     }
 }
+
+    /* --- Small-screen fixes specific to the "Notre Infrastructure" / vps-features section --- */
+    @media (max-width: 600px) {
+        /* give the features grid a comfortable side padding on narrow viewports */
+        .vps-features .features-grid {
+            padding: 0 0.8rem;
+            grid-template-columns: 1fr !important;
+            gap: 1rem;
+        }
+
+        /* make the feature card use full width and read-friendly alignment */
+        .vps-features .feature {
+            text-align: left;
+            padding: 1rem;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .vps-features .feature h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ensure long words wrap and line-height is comfortable */
+        .vps-features .feature p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            hyphens: auto;
+            margin: 0;
+        }
+
+        /* make the connectivity badge sit naturally in flow */
+        .vps-features .connectivity-badge {
+            display: inline-block;
+            margin-top: 0.6rem;
+            margin-left: 0;
+            font-size: 0.9rem;
+        }
+
+        /* avoid flex/grid children forcing minimum widths that create overflow */
+        .vps-features * {
+            min-width: 0;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .vps-features .feature h4 { font-size: 1rem; }
+        .vps-features .feature p { font-size: 0.92rem; }
+    }
