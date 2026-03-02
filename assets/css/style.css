@@ -1471,6 +1471,37 @@ footer {
     .contact-content { grid-template-columns: 1fr; }
 }
 
+/* Strong overrides to ensure contact cards render correctly even if other rules interfere */
+.contact-content .contact-cards {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1.5rem !important;
+}
+
+.contact-content .contact-card {
+    display: block !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(20,20,20,0.08)) !important;
+    border: 1px solid rgba(255,215,0,0.08) !important;
+    padding: 1.3rem 1.25rem !important;
+    border-radius: 14px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.55) !important;
+}
+
+.contact-content .contact-card .card-icon {
+    display: inline-flex !important;
+    width: 64px !important;
+    height: 64px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    margin: 0 auto 0.9rem !important;
+}
+
+.contact-content .card-cta {
+    display: block !important;
+}
+
 .contact-info {
     color: #e0e0e0;
     line-height: 1.6;
