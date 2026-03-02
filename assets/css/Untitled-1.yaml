@@ -1,0 +1,8 @@
+tunnel: uptime-kuma
+credentials-file: /root/.cloudflared/39a1a253-e6ae-47d7-b9e7-20a2bfa035ae.json
+
+ingress:
+  - hostname: status.velaryonhosting.fr
+    service: http://127.0.0.1:3001
+  # fallback (toutes autres requêtes renvoient 404)
+  - service: http_status:404

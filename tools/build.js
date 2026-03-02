@@ -15,29 +15,24 @@ async function build() {
   const outdir = path.join(__dirname, '..', 'assets', 'dist');
   if (!fs.existsSync(outdir)) fs.mkdirSync(outdir, { recursive: true });
 
-  // Bundle using esbuild API
-  const result = await esbuild.build({
+  // Bundle using esbuild API and write output to disk (outfile).
+  // Using outfile/write:true is more reliable across environments than read-back from result.outputFiles.
+  const bundlePath = path.join(outdir, 'bundle.js');
+  await esbuild.build({
     entryPoints: [path.join(__dirname, '..', 'assets', 'js', 'main.js')],
     bundle: true,
     minify: true,
     sourcemap: true,
-    write: false,
+    outfile: bundlePath,
+    // write is true by default when outfile is provided
   });
 
-  // result.outputFiles contains the generated files (JS + map)
-  const jsFile = result.outputFiles.find(f => f.path.endsWith('.js'));
-  if (!jsFile) throw new Error('No JS output from esbuild');
-  const jsBuf = Buffer.from(jsFile.contents);
-  const jsHash = hashContent(jsBuf);
-
-  const bundlePath = path.join(outdir, 'bundle.js');
-  fs.writeFileSync(bundlePath, jsBuf);
-
-  // Also write sourcemap if present
-  const mapFile = result.outputFiles.find(f => f.path.endsWith('.js.map'));
-  if (mapFile) {
-    fs.writeFileSync(bundlePath + '.map', Buffer.from(mapFile.contents));
+  if (!fs.existsSync(bundlePath)) {
+    throw new Error(`esbuild did not produce ${bundlePath}`);
   }
+
+  const jsBuf = fs.readFileSync(bundlePath);
+  const jsHash = hashContent(jsBuf);
 
   // Hash CSS file (no build step but we can version it)
   const cssPath = path.join(__dirname, '..', 'assets', 'css', 'style.css');
