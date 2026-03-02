@@ -1373,7 +1373,8 @@ footer {
 
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* make left column (cards) wider so cards can lay out horizontally */
+    grid-template-columns: 2fr 1fr;
     gap: 2rem;
     max-width: 1200px;
     margin: 1.5rem auto 3rem;
