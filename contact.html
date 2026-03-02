@@ -71,40 +71,31 @@
         </section>
 
         <section class="contact-content">
-            <div class="contact-info">
-                <h2>Informations de contact</h2>
-                <p><strong>Email :</strong> support@velaryonhosting.fr</p>
-                <p><strong>Discord :</strong> <a href="https://discord.gg/8vhgVWgFGG" target="_blank">Rejoignez notre serveur</a></p>
-                <p><strong>Support :</strong> 24/7 via ticket ou Discord</p>
-                <p><strong>Réponse :</strong> Sous 24h en moyenne</p>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="card-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p>Envoyez-nous un message détaillé, incluez votre nom et identifiants si nécessaire. Nous répondons généralement sous 24 heures.</p>
+                    <a class="card-cta" href="mailto:support@velaryonhosting.fr?subject=[Support]%20Demande" target="_blank" rel="noopener noreferrer">Envoyer un email</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="card-icon">💬</div>
+                    <h3>Discord</h3>
+                    <p>Support en temps réel via notre serveur Discord — idéal pour les questions urgentes ou le dépannage.</p>
+                    <a class="card-cta" href="https://discord.gg/8vhgVWgFGG" target="_blank" rel="noopener noreferrer">Rejoindre le serveur</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="card-icon">🔐</div>
+                    <h3>Portail client</h3>
+                    <p>Si vous avez un compte, ouvrez un ticket via le portail client pour un suivi structuré de votre demande.</p>
+                    <a class="card-cta" href="https://achat.velaryonhosting.fr/login" target="_blank" rel="noopener noreferrer">Accéder au portail</a>
+                </div>
             </div>
-
-            <div class="contact-form">
-                <h2>Envoyez-nous un message</h2>
-                <form id="contact-form">
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" required autocomplete="name">
-
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required autocomplete="email">
-
-                        <label for="subject">Sujet</label>
-                        <select id="subject" required>
-                        <option value="">Choisissez un sujet</option>
-                        <option value="support">Support technique</option>
-                        <option value="billing">Facturation</option>
-                        <option value="sales">Ventes</option>
-                        <option value="other">Autre</option>
-                    </select>
-
-                    <label for="message">Message</label>
-                    <textarea id="message" rows="5" required autocomplete="off"></textarea>
-
-                    <!-- Honeypot to deter bots (should remain empty) -->
-                    <input type="text" id="hp_field" name="hp_field" class="hidden" autocomplete="off">
-
-                    <button type="submit">Envoyer</button>
-                </form>
+            <div class="contact-info">
+                <h2>Besoin d'aide supplémentaire ?</h2>
+                <p class="muted">Indiquez toujours : votre nom, adresse email, sujet et identifiant de commande (si applicable) pour accélérer la prise en charge.</p>
             </div>
         </section>
     </main>
