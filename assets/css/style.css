@@ -934,6 +934,25 @@ img, video, iframe { max-width: 100%; height: auto; }
     header { padding: 0.5rem 0; }
 }
 
+/* Connectivity badge shown near the header/logo to highlight network capacity */
+.connectivity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(90deg, rgba(255,215,0,0.06), rgba(187,134,252,0.02));
+    color: var(--vel-accent);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255,215,0,0.08);
+}
+
+/* Slightly smaller on very small screens to avoid crowding */
+@media (max-width: 420px) {
+    .connectivity-badge { font-size: 0.82rem; padding: 0.2rem 0.5rem; }
+}
+
 /* Extra narrow-screen fixes to ensure sections take full width and remove right gutter */
 @media (max-width: 420px) {
     html, body { width: 100vw; overflow-x: hidden; }
