@@ -17,27 +17,8 @@
     <link rel="preload" href="assets/css/style.css" as="style">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/dist/bundle.js" defer></script>
-
-    <meta property="og:title" content="À Propos | Velaryon Hosting - Solutions Cloud et Hébergement" />
-    <meta property="og:description" content="Découvrez Velaryon Hosting : histoire, vision et engagement pour des solutions cloud privé sécurisé et VPS gaming haute performance." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://velaryonhosting.fr/about.html" />
-    <meta property="og:image" content="https://velaryonhosting.fr/assets/images/ark-banner.webp" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="À Propos | Velaryon Hosting" />
-    <meta name="twitter:description" content="Notre histoire, notre vision et notre engagement pour un hébergement performant et sécurisé." />
-    <meta name="twitter:image" content="https://velaryonhosting.fr/assets/images/ark-banner.webp" />
-</head>
-<body>
-    <div class="animated-bg">
-        <div class="circle circle1"></div>
-        <div class="circle circle2"></div>
-        <div class="circle circle3"></div>
-        <div class="circle circle4"></div>
-        <div class="circle circle5"></div>
-        <div class="circle circle6"></div>
-        <div class="circle circle7"></div>
-    </div>
+    </head>
+    <body>
     <header>
         <nav>
             <div class="logo">
@@ -87,18 +68,18 @@
         <section class="about-content">
             <div class="about-grid">
                 <div class="about-card">
-                    <div class="about-icon">📖</div>
+                    <div class="about-icon" aria-hidden="true"></div>
                     <h3>Notre Histoire</h3>
                     <p>Velaryon Hosting est née en 2026 avec une vision claire : offrir des solutions technologiques complètes et accessibles à tous. Dès le lancement, nous proposons un éventail de services large incluant le cloud privé sécurisé,le panel gaming, l'hébergement web performant, les VPS gaming haute performance et l'hébergement WordPress rapide.</p>
                     <p>Notre objectif est de répondre aux besoins des particuliers, entreprises et gamers avec des prix abordables et une qualité accrue, sans compromis sur la sécurité et la performance.</p>
                 </div>
 
                 <div class="about-card">
-                    <div class="about-icon">🎯</div>
+                    <div class="about-icon" aria-hidden="true"></div>
                     <h3>Vision & Mission</h3>
                     <div class="vision-mission-content">
                         <div class="vision-item">
-                            <h4>🎯 Vision</h4>
+                            <h4>Vision</h4>
                             <p>Proposer un hébergement web performant, en offrant des solutions cloud privé sécurisé innovantes et accessibles à tous.</p>
                         </div>
                         <div class="mission-item">
@@ -155,41 +136,53 @@
 
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Velaryon Hosting</h4>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo"><img src="Valeryon.png" alt="Velaryon Hosting" width="36" height="36"> <span>Velaryon Hosting</span></a>
                 <p>Hébergement web performant et cloud privé sécurisé pour tous vos besoins.</p>
             </div>
-            <div class="footer-section">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="services.html">Hébergement Web Performant</a></li>
-                    <li><a href="services.html">Cloud Privé Sécurisé</a></li>
-                    <li><a href="services.html">VPS Gaming Haute Performance</a></li>
-                    <li><a href="services.html">Hébergement WordPress Rapide</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>À Propos</h4>
-                <ul>
-                    <li><a href="about.html">Notre Histoire</a></li>
-                    <li><a href="about.html">Vision et Mission</a></li>
-                    <li><a href="about.html">Engagement Sécurité</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p>Email: contact@velaryonhosting.fr</p>
-                <p>Téléphone: +33 7 69 65 70 67</p>
-            </div>
-            <div class="footer-section">
-                <h4>Connectivité</h4>
-                <p>Nous disposons d'une liaison fibre 10 Gbps pour des performances réseau optimales.</p>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Hébergement Web</a></li>
+                        <li><a href="services.html">Cloud Privé</a></li>
+                        <li><a href="vps.html">VPS Gaming</a></li>
+                        <li><a href="services.html">WordPress</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">Notre histoire</a></li>
+                        <li><a href="about.html">Vision &amp; mission</a></li>
+                        <li><a href="about.html">Sécurité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Légal &amp; conformité</h4>
+                    <ul>
+                        <li><a href="mentions-legales.html">Mentions légales</a></li>
+                        <li><a href="cgv.html">CGV</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de confidentialité</a></li>
+                        <li><a href="signalement.html">Procédure de signalement</a></li>
+                        <li><a href="sla.html">SLA</a></li>
+                        <li><a href="dpa.html">DPA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><a href="mailto:contact@velaryonhosting.fr">contact@velaryonhosting.fr</a></p>
+                    <p>+33 7 69 65 70 67</p>
+                    <p><a class="footer-cta" href="contact.html">Nous contacter</a></p>
+                </div>
             </div>
         </div>
-        <p>&copy; 2026 Velaryon Hosting. Tous droits réservés.</p>
-<!-- Modal de connexion -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 Velaryon Hosting. Tous droits réservés.</p>
+            <p><a href="sitemap.xml">Sitemap</a></p>
+        </div>
     </footer>
     <script src="assets/js/nav-toggle.js" defer></script>
 

@@ -1478,6 +1478,12 @@ footer {
     transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
     text-align: center;
     margin-top: auto; /* push CTA to bottom of the card so all buttons align */
+    /* Force consistent button height and center text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px; /* consistent height across cards */
+    box-sizing: border-box;
 }
 
 .card-cta:hover {
@@ -1523,6 +1529,10 @@ footer {
 .contact-content .card-cta {
     display: block !important;
     margin-top: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 48px !important;
 }
 
 .contact-info {
@@ -3130,3 +3140,130 @@ footer {
     transform: none !important;
     text-align: center !important;
 }
+
+/* ===================================================
+   Styles for the standardized site footer (.site-footer)
+   Provides a clean, responsive layout matching the site theme
+   =================================================== */
+.site-footer {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+    background-color: var(--vel-surface);
+    color: var(--vel-text);
+    padding: 2.25rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.03);
+}
+.site-footer .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+.footer-brand {
+    flex: 1 1 260px;
+    min-width: 200px;
+}
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--vel-text);
+    text-decoration: none;
+    font-weight: 700;
+}
+.footer-logo img { border-radius: 8px; }
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    flex: 2 1 600px;
+    flex-wrap: wrap;
+}
+.footer-col { min-width: 140px; }
+.footer-col h4 { color: var(--vel-accent); margin-bottom: 0.6rem; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col li { margin-bottom: 0.45rem; }
+.footer-col a { color: var(--vel-muted); font-size: 0.95rem; }
+.footer-col a:hover { color: var(--vel-primary); }
+.site-footer .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.03);
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center; /* center both copyright and sitemap */
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    color: var(--vel-muted);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .site-footer .footer-inner { flex-direction: column; gap: 1rem; }
+    .footer-links { gap: 1rem; }
+    /* On small screens stack the footer-bottom items vertically */
+    .site-footer .footer-bottom { justify-content: center; text-align: center; flex-direction: column; gap: 0.4rem; }
+}
+
+/* =====================
+   Legal page (mentions-legales) layout helpers
+   ===================== */
+.legal-hero {
+    padding: 2.25rem 1rem;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+    margin: 1rem auto;
+    border-radius: calc(var(--vel-radius-md) + 2px);
+    max-width: 1100px;
+}
+.legal-hero h1 {
+    font-size: 1.9rem;
+    margin-bottom: 0.4rem;
+    color: var(--vel-text);
+}
+.legal-hero p { color: var(--vel-muted); margin-bottom: 0; }
+
+.legal-content {
+    max-width: 980px;
+    margin: 1.25rem auto 2.5rem;
+    padding: 1.5rem 1.5rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+    border-radius: var(--vel-radius-md);
+    box-shadow: var(--vel-shadow-sm);
+    color: var(--vel-text);
+    font-size: 1.02rem; /* slightly larger for readability */
+    line-height: 1.9; /* more generous leading */
+    text-align: justify;
+}
+.legal-content h2 {
+    margin-top: 1.25rem;
+    color: var(--vel-accent);
+    font-size: 1.25rem;
+}
+.legal-content h3 {
+    margin-top: 1rem;
+    color: var(--vel-primary);
+    font-size: 1.05rem;
+}
+.legal-content .lead {
+    color: var(--vel-muted);
+    font-size: 1.03rem;
+    margin-bottom: 1rem;
+}
+.legal-content p, .legal-content li { margin-bottom: 0.9rem; color: var(--vel-text); }
+.legal-content ul { margin-left: 1rem; padding-left: 0.8rem; list-style: disc outside; }
+.legal-content li { margin-bottom: 0.6rem; }
+.legal-content a { color: var(--vel-primary); text-decoration: underline; }
+
+/* small tweak for long documents: increase paragraph spacing and add subtle divider between major sections */
+.legal-content h2 + p, .legal-content h3 + p { margin-top: 0.25rem; }
+.legal-content section + section { margin-top: 1.25rem; }
+
+@media (max-width: 700px) {
+    .legal-hero h1 { font-size: 1.5rem; }
+    .legal-content { padding: 1rem; margin: 0.8rem; font-size: 1rem; line-height: 1.6; text-align: left; }
+}
+
