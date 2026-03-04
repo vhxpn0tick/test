@@ -495,12 +495,21 @@ main {
     background-color: #bb86fc;
     color: #121212;
     font-weight: bold;
+    /* Larger, more prominent primary CTA */
+    padding: 0.95rem 1.6rem;
+    font-size: 1.125rem; /* ~18px */
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(187,134,252,0.08);
 }
 
 .cta-button.secondary {
     background-color: transparent;
     color: #bb86fc;
     border: 2px solid #bb86fc;
+    /* Slightly larger secondary CTA to match visual weight */
+    padding: 0.85rem 1.4rem;
+    font-size: 1.05rem; /* ~17px */
+    border-radius: 14px;
 }
 
 .cta-button.secondary:hover {
@@ -839,7 +848,12 @@ main {
 
     /* Stack CTAs vertically when space is limited */
     .hero-ctas { flex-direction: column; align-items: stretch; }
-    .cta-button { width: 100%; }
+    .cta-button {
+        width: 100%;
+        /* slightly smaller on mobile to avoid overflow */
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+    }
 
     /* Make cards take full width and remove fixed widths */
     .pricing-cards, .gaming-servers, .advantages-grid, .pricing-preview .pricing-cards {
@@ -1400,6 +1414,10 @@ footer {
     box-shadow: 0 8px 20px rgba(0,0,0,0.55);
     transition: transform 0.22s cubic-bezier(.2,.9,.2,1), box-shadow 0.22s;
     overflow: hidden;
+    /* Make card a column flex container so CTAs can be pushed to the bottom
+       and align horizontally across the grid. */
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-card::after {
@@ -1459,6 +1477,7 @@ footer {
     box-shadow: 0 8px 18px rgba(187,134,252,0.08);
     transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
     text-align: center;
+    margin-top: auto; /* push CTA to bottom of the card so all buttons align */
 }
 
 .card-cta:hover {
@@ -1479,7 +1498,10 @@ footer {
 }
 
 .contact-content .contact-card {
-    display: block !important;
+    /* keep the strong override but switch to flex so CTA alignment works even
+       when other styles try to force display:block */
+    display: flex !important;
+    flex-direction: column !important;
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(20,20,20,0.08)) !important;
     border: 1px solid rgba(255,215,0,0.08) !important;
     padding: 1.3rem 1.25rem !important;
@@ -1500,6 +1522,7 @@ footer {
 
 .contact-content .card-cta {
     display: block !important;
+    margin-top: auto !important;
 }
 
 .contact-info {
@@ -1990,7 +2013,8 @@ footer {
 /* Banner used when no image files are available: gradient + title/subtitle */
 .game-banner {
     width: 100%;
-    height: 200px;
+    /* increase banner height so more of the image is visible */
+    height: 320px;
     border-radius: 10px;
     margin-bottom: 1rem;
     overflow: hidden;
@@ -1999,6 +2023,94 @@ footer {
     justify-content: flex-start;
     position: relative;
     color: #fff;
+    z-index: 0; /* keep banner behind the plans which will be pulled up */
+}
+
+/* Reusable section/banner helper (use in services, vps, index etc.)
+   Example markup:
+   <div class="section-banner">
+       <img class="section-banner-img" src="..." alt="...">
+       <div class="banner-inner">
+           <span class="banner-title">Titre</span>
+           <span class="banner-sub">Sous-titre</span>
+       </div>
+       <div class="banner-emblem" aria-hidden="true"></div>
+   </div>
+*/
+.section-banner {
+    width: 100%;
+    height: 320px; /* default desktop height */
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    background: linear-gradient(90deg, rgba(30,30,30,0.6) 0%, rgba(40,40,40,0.6) 100%);
+}
+
+.section-banner-img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills the area while cropping excess */
+    object-position: center center;
+    display: block;
+}
+
+.section-banner .banner-inner {
+    position: relative; /* appear above the image */
+    z-index: 3;
+    padding: 1rem 1.5rem;
+    color: #fff;
+}
+
+.section-banner .banner-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #FFD700;
+    margin-bottom: 0.25rem;
+}
+
+.section-banner .banner-sub {
+    display: block;
+    color: #cfcfcf;
+    font-size: 0.95rem;
+}
+
+.section-banner .banner-emblem {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 72px;
+    height: 44px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center center;
+    z-index: 4;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+@media (max-width: 900px) {
+    .section-banner { height: 220px; }
+    .section-banner .banner-emblem { width: 56px; height: 36px; top: 10px; right: 10px; }
+}
+
+
+/* Ensure the inline <img> inside the banner fills the banner area nicely */
+.game-banner-img {
+    width: 100%;
+    height: 100%;
+    /* show the entire image without cropping; will letterbox if aspect ratio differs */
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    background-color: transparent;
 }
 .game-banner .banner-inner {
     padding: 1rem 1.5rem;
@@ -2066,17 +2178,19 @@ footer {
 /* small responsive tweak */
 @media (max-width: 900px) {
     .banner-emblem { width: 56px; height: 36px; top: 10px; right: 10px; }
+    .game-banner { height: 220px; }
+    .game-banner-img { object-position: center top; }
 }
 
 /* === Override with local image files (place your images in assets/images/) === */
 /* Banners (use .webp if available) */
-.game-banner[data-game="Rust"] { background-image: url("../images/rust-banner.webp"); background-size: cover; background-position: center center; }
-.game-banner[data-game="Minecraft"] { background-image: url("../images/minecraft-banner.webp"); background-size: cover; background-position: center center; }
-.game-banner[data-game="FiveM"] { background-image: url("../images/fivem-banner.webp"); background-size: cover; background-position: center center; }
-.game-banner[data-game="Satisfactory"] { background-image: url("../images/satisfactory-banner.webp"); background-size: cover; background-position: center center; }
-.game-banner[data-game="DayZ"] { background-image: url("../images/dayz-banner.webp"); background-size: cover; background-position: center center; }
-.game-banner[data-game="ARK"] { background-image: url("../images/ark-banner.webp"); background-size: cover; background-position: center center; }
-.game-banner[data-game="Autres"] { background-image: linear-gradient(135deg, #121212, #1f1f1f); background-size: cover; background-position: center center; }
+.game-banner[data-game="Rust"] { background-image: url("../images/rust-banner.webp"); background-size: contain; background-repeat: no-repeat; background-position: center center; }
+.game-banner[data-game="Minecraft"] { background-image: url("../images/minecraft-banner.webp"); background-size: contain; background-repeat: no-repeat; background-position: center center; }
+.game-banner[data-game="FiveM"] { background-image: url("../images/fivem-banner.webp"); background-size: contain; background-repeat: no-repeat; background-position: center center; }
+.game-banner[data-game="Satisfactory"] { background-image: url("../images/satisfactory-banner.webp"); background-size: contain; background-repeat: no-repeat; background-position: center center; }
+.game-banner[data-game="DayZ"] { background-image: url("../images/dayz-banner.webp"); background-size: contain; background-repeat: no-repeat; background-position: center center; }
+.game-banner[data-game="ARK"] { background-image: url("../images/ark-banner.webp"); background-size: contain; background-repeat: no-repeat; background-position: center center; }
+.game-banner[data-game="Autres"] { background-image: linear-gradient(135deg, #121212, #1f1f1f); background-size: contain; background-repeat: no-repeat; background-position: center center; }
 
 /* Emblems / thumbs (optional, use png or webp) */
 .banner-emblem[data-emblem="rust"] { background-image: url("../images/rust-thumb.png"); }
@@ -2223,6 +2337,13 @@ footer {
     padding: 0 2rem;
 }
 
+/* Pull the plans up so they overlap the banner; cards will appear above the banner */
+.vps-plans {
+    margin-top: -80px;
+    position: relative;
+    z-index: 2; /* ensure plans/cards sit above the banner */
+}
+
 .vps-plans > .vps-card {
     flex: 0 1 320px; /* preferred width, but allow shrink on smaller screens */
     display: flex;
@@ -2230,6 +2351,7 @@ footer {
     align-items: stretch;
     height: auto; /* let flexbox compute row height */
 }
+.vps-plans > .vps-card { z-index: 3; position: relative; }
 
 .vps-card {
     background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
@@ -2256,6 +2378,10 @@ footer {
     right: 0;
     height: 6px;
     background: linear-gradient(90deg, var(--vel-primary) 0%, var(--vel-accent) 100%);
+    /* include the decorative bar within the card's top border by
+       rounding the top corners to match the card radius */
+    border-top-left-radius: var(--vel-radius-md);
+    border-top-right-radius: var(--vel-radius-md);
 }
 
 .vps-card:hover {
@@ -2271,21 +2397,67 @@ footer {
 
 .vps-card.popular::before {
     background: linear-gradient(90deg, #FFD700 0%, #bb86fc 100%);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
 
 .popular-badge {
     position: absolute;
-    top: -12px;
+    top: 0; /* align center of badge with top edge */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-50%); /* center the badge on the top edge */
     background: linear-gradient(135deg, #FFD700 0%, #bb86fc 100%);
     color: #121212;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    padding: 0.42rem 0.85rem;
+    border-radius: 18px;
+    font-size: 0.72rem; /* slightly smaller for clean fit */
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.45px;
+    z-index: 7;
+}
+
+@media (max-width: 420px) {
+    .popular-badge {
+        top: -2px;
+        font-size: 0.66rem;
+        padding: 0.32rem 0.64rem;
+    }
+}
+
+/* On small screens, move the popular badge inside the card (top-right)
+   so it doesn't overlap the card title. This keeps the desktop layout
+   unchanged while fixing the mobile overlap issue. */
+@media (max-width: 600px) {
+    .vps-card.popular {
+        /* ensure there's a larger internal gap so internal content isn't under the badge */
+        /* increased to give room for the badge + header on narrow viewports */
+        padding-top: 1.5rem;
+    }
+    .vps-card.popular .popular-badge,
+    .service-card.popular .popular-badge {
+        /* place the badge in the normal flow above the header so it cannot overlap the title */
+        position: static;
+        display: block; /* allow margin:auto centering */
+        margin: 0 auto 0.5rem;
+        text-align: center;
+        font-size: 0.66rem;
+        padding: 0.28rem 0.56rem;
+        border-radius: 10px;
+    }
+}
+
+/* Small-screen tweak: ensure the header in a popular card sits below the badge
+   by adding a small top margin specifically when the badge is present. This
+   prevents overlap with larger title fonts on tight viewports. */
+@media (max-width: 600px) {
+    .vps-card.popular .vps-header {
+        margin-top: 0; /* header will sit under the badge in the normal flow */
+    }
 }
 
 .vps-header {
@@ -2294,6 +2466,23 @@ footer {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+/* Thumbnail shown on the small offer container (vignette PNG for each offer) */
+.vps-thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
+    flex-shrink: 0;
+}
+
+/* align header to start when thumbnail is present to avoid centered layout */
+.vps-card.has-thumb .vps-header {
+    justify-content: flex-start;
+    gap: 1rem;
 }
 
 .vps-header h3 {
@@ -2316,7 +2505,8 @@ footer {
 
 .vps-specs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* allow up to three spec boxes on a row (vCPU / RAM / SSD) and collapse responsively */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -2348,6 +2538,13 @@ footer {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.35rem;
+    }
+}
+
+/* Ensure on very small screens specs stack vertically to avoid cramped layout */
+@media (max-width: 520px) {
+    .vps-specs {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -2918,3 +3115,18 @@ footer {
         .vps-features .feature h4 { font-size: 1rem; }
         .vps-features .feature p { font-size: 0.92rem; }
     }
+
+/* Final safety rule: force popular badges to be visually centered inside
+   their card containers. This wins over other rules and is intentionally
+   placed at the end of the stylesheet. */
+.vps-card.popular > .popular-badge,
+.service-card.popular > .popular-badge {
+    display: inline-block !important;
+    align-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    text-align: center !important;
+}
