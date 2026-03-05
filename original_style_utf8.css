@@ -1,4 +1,4 @@
-/* Reset and Base Styles */
+﻿/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -34,23 +34,45 @@ body {
 .hidden { display: none !important; }
 
 /* Theme utilities */
+.vel-gradient {
+    background: var(--vel-gradient) !important;
+}
+.vel-btn {
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    font-weight: 800;
+    border: none;
+    border-radius: var(--vel-radius-md);
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    box-shadow: var(--vel-shadow-sm);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.12s ease;
+}
+.vel-btn:hover { transform: translateY(-2px); box-shadow: var(--vel-shadow-md); }
+.vel-surface {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+    background-color: var(--vel-surface);
+    border-radius: var(--vel-radius-md);
+    box-shadow: var(--vel-shadow-sm);
+    border: 1px solid rgba(255,255,255,0.03);
+}
 
 /* Global element normalizations to enforce consistent radius, color and spacing */
-header, .modal-content, .pricing-card, .service {
+header, .modal-content, .pricing-card, .advantage, .service, .game-card, .individual-services .service {
     border-radius: var(--vel-radius-md) !important;
 }
- .pricing-card, .service {
+.game-card, .pricing-card, .advantage, .service {
     background: var(--vel-surface) !important;
     color: var(--vel-text) !important;
 }
 
 /* Buttons & CTAs */
-.cta-button, .login-btn, .tab-content button, .discord-auth-btn {
+.cta-button, .login-btn, .game-card .cta-btn, .tab-content button, .discord-auth-btn {
     border-radius: var(--vel-radius-md) !important;
 }
 
 /* Inputs */
-input {
+input, select, textarea {
     background: #0f0f11;
     border: 1px solid rgba(255,255,255,0.04);
     color: var(--vel-text);
@@ -59,6 +81,90 @@ input {
 }
 
 /* Accent helpers */
+.accent-text { color: var(--vel-primary) !important; }
+.accent-gold { color: var(--vel-accent) !important; }
+
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(187, 134, 252, 0.3) 0%, rgba(255, 215, 0, 0.15) 50%, transparent 100%);
+    box-shadow: 0 0 30px rgba(187, 134, 252, 0.4);
+    animation: float 40s infinite ease-in-out, pulse 8s infinite ease-in-out;
+}
+
+.circle1 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: 10%;
+    animation-duration: 40s, 8s;
+    animation-delay: 0s, 0s;
+}
+
+.circle2 {
+    width: 180px;
+    height: 180px;
+    top: 50%;
+    left: 70%;
+    animation-duration: 50s, 10s;
+    animation-delay: 5s, 1s;
+}
+
+.circle3 {
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    left: 20%;
+    animation-duration: 35s, 7s;
+    animation-delay: 10s, 2s;
+}
+
+.circle4 {
+    width: 150px;
+    height: 150px;
+    top: 30%;
+    left: 50%;
+    animation-duration: 55s, 11s;
+    animation-delay: 15s, 3s;
+}
+
+.circle5 {
+    width: 110px;
+    height: 110px;
+    top: 70%;
+    left: 80%;
+    animation-duration: 45s, 9s;
+    animation-delay: 20s, 4s;
+}
+
+.circle6 {
+    width: 90px;
+    height: 90px;
+    top: 20%;
+    left: 80%;
+    animation-duration: 38s, 7.5s;
+    animation-delay: 8s, 0.5s;
+}
+
+.circle7 {
+    width: 140px;
+    height: 140px;
+    top: 60%;
+    left: 10%;
+    animation-duration: 52s, 10.5s;
+    animation-delay: 12s, 1.5s;
+}
 
 @keyframes float {
     0% {
@@ -91,6 +197,10 @@ input {
 
 /* Reduce heavy animated background on mobile and for users who prefer reduced motion
    This lowers CPU work & reduces layout shifts impacting Core Web Vitals. */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+    .animated-bg { display: none !important; }
+    .circle { animation: none !important; }
+}
 
 /* Login Button */
 .login-btn {
@@ -343,7 +453,7 @@ nav ul li a {
 
 /* Main Content */
 main {
-    /* Augmenté pour compenser la hauteur du header fixe sur petits et grands écrans */
+    /* Augment├® pour compenser la hauteur du header fixe sur petits et grands ├®crans */
     margin-top: 110px;
 }
 
@@ -351,7 +461,7 @@ main {
 .hero {
     background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
     color: white;
-    padding: 5rem 2rem 3rem; /* un peu plus d'espace en haut pour séparer du header */
+    padding: 5rem 2rem 3rem; /* un peu plus d'espace en haut pour s├®parer du header */
     text-align: center;
 }
 
@@ -408,6 +518,42 @@ main {
 }
 
 /* Advantages Section */
+.advantages {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advantages h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.advantage {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.advantage:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.advantage h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
 
 /* Pricing Preview */
 .pricing-preview {
@@ -459,16 +605,209 @@ main {
 }
 
 /* Gaming Servers */
+.gaming-servers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.game-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+.game-card p {
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.game-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.game-card li {
+    margin-bottom: 0.5rem;
+    color: #ccc;
+}
+
+.game-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #bb86fc;
+    margin: 1rem 0;
+}
+
+.game-card .cta-btn {
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--vel-radius-md);
+    cursor: pointer;
+    font-weight: 800;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: var(--vel-shadow-sm);
+}
+
+.game-card .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vel-shadow-md);
+}
+
+.game-card.custom {
+    border: 2px solid #FFD700;
+}
 
 /* Enhanced gaming-plans card styles (inspired by the provided mock) */
+.gaming-plans .game-card {
+    max-width: 360px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #0b0d0d 0%, #121214 100%);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.gaming-plans .game-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.gaming-plans .game-image {
+    width: 72px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.stock-badge {
+    position: absolute;
+    right: 0.25rem;
+    top: -6px;
+    background: #10b981; /* green */
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(16,185,129,0.14);
+}
+
+.gaming-plans .game-card h3 {
+    color: #bb86fc;
+    margin: 0.5rem 0 0.25rem 0;
+    font-size: 1.05rem;
+}
+
+.gaming-plans .game-card .price {
+    font-size: 2.25rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0.5rem 0 0.25rem 0;
+    font-weight: 800;
+}
+
+.gaming-plans .game-card .price .period {
+    display: block;
+    font-size: 0.85rem;
+    color: #bdbdbd;
+    font-weight: 600;
+}
+
+.gaming-plans .game-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0.8rem 0 1rem 0;
+}
+
+.gaming-plans .game-specs span {
+    display: block;
+    background: #0f0f11;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.02);
+    color: #cfcfcf;
+    font-size: 0.95rem;
+}
+
+.gaming-plans .game-card .cta-btn {
+    width: 100%;
+    padding: 0.95rem;
+    border-radius: var(--vel-radius-md);
+    background: var(--vel-gradient);
+    color: #0b0b0d;
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: var(--vel-shadow-sm);
+}
+
+.gaming-plans .game-card .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vel-shadow-md);
+}
 
 @media (max-width: 900px) {
-     .gaming-plans {
+    .gaming-offers .offer-grid, .gaming-plans {
         grid-template-columns: 1fr !important;
+    }
+    .gaming-plans .game-card {
+        max-width: 100%;
     }
 }
 
 /* Pricing Table */
+.pricing-table {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pricing-table h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pricing-table p {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.individual-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
 
 /* === Conservative responsive tweaks (mobile-first, non-intrusive) ===
    Purpose: improve layout on phones/tablets without changing markup or adding JS.
@@ -517,15 +856,15 @@ main {
     }
 
     /* Make cards take full width and remove fixed widths */
-    .pricing-cards, .pricing-preview .pricing-cards {
+    .pricing-cards, .gaming-servers, .advantages-grid, .pricing-preview .pricing-cards {
         flex-direction: column;
         gap: 1rem;
     }
 
-    .pricing-card { width: 100%; max-width: 100%; }
+    .pricing-card, .game-card, .advantage { width: 100%; max-width: 100%; }
 
     /* Forms: stack labels/inputs and increase touch targets */
-     input {
+    .contact-form input, .contact-form textarea, input, select, textarea {
         padding: 0.75rem;
         font-size: 1rem;
     }
@@ -539,13 +878,14 @@ main {
     nav { padding: 0 1.5rem; }
     .hero { padding: 2.5rem 1.5rem; }
     .hero h1 { font-size: 2rem; }
-    .pricing-cards { gap: 1.5rem; }
+    .pricing-cards, .gaming-servers { gap: 1.5rem; }
 }
 
 /* Ensure large images & embeds never overflow */
-img { max-width: 100%; height: auto; }
+img, video, iframe { max-width: 100%; height: auto; }
 
 /* Minor accessibility: ensure focus outlines are visible on keyboard navigation */
+:focus { outline: 3px solid rgba(187,134,252,0.15); outline-offset: 2px; }
 
 /* End of conservative responsive tweaks */
 
@@ -575,6 +915,9 @@ img { max-width: 100%; height: auto; }
         z-index: 1300;
     }
 
+    .nav-toggle .hamburger{ display:block }
+    .nav-toggle .hamburger rect { fill: var(--vel-text); }
+
     /* subtle hover/focus ring */
     .nav-toggle:hover, .nav-toggle:focus { box-shadow: 0 6px 14px rgba(0,0,0,0.45); }
 
@@ -582,6 +925,21 @@ img { max-width: 100%; height: auto; }
     header nav > ul { display: none !important; }
 
     /* When menu open, show vertical stacked nav as an overlay below header */
+    body.nav-open header nav > ul {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0.5rem;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: rgba(30,30,30,0.98);
+        padding: 1rem;
+        z-index: 1200;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+
+    body.nav-open header { box-shadow: none; }
 
     /* larger tap targets */
     header nav > ul li a { padding: 0.75rem 0.5rem; display:block; border-radius:6px }
@@ -624,6 +982,7 @@ img { max-width: 100%; height: auto; }
     }
 
     /* Ensure the animated background can't push content horizontally */
+    .animated-bg { left: 0; right: 0; width: 100vw; }
 
     /* Slightly reduce large h1 on tiny screens so it doesn't force layout issues */
     .services-hero h1 { font-size: 1.6rem; }
@@ -632,8 +991,8 @@ img { max-width: 100%; height: auto; }
 /* Extra shrink rules to prevent flex/grid children from forcing overflow */
 @media (max-width: 420px) {
     /* Allow flex items to shrink below their content width when necessary */
-    .vps-plans, .service-group .vps-plans, .vps-card,
-    
+    .vps-plans, .service-group .vps-plans, .vps-card, .service-card,
+    /* About cards */
     .about-grid, .about-card {
         min-width: 0 !important;
         width: 100% !important;
@@ -696,9 +1055,80 @@ header nav > ul { display: none !important; }
     text-align: left;
 }
 
+.pricing-table h2 {
+    text-align: center;
+    margin: 2rem 0 1rem 0;
+}
+
+.pricing-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.pricing-table th, .pricing-table td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.pricing-table th {
+    background-color: #2d2d2d;
+    color: white;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 /* Guarantees */
+.guarantees {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.guarantees h2 {
+    margin-bottom: 2rem;
+}
+
+.guarantees ul {
+    list-style: none;
+    padding: 0;
+}
+
+.guarantees li {
+    background: #1e1e1e;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
 
 /* FAQ */
+.faq {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.faq-item {
+    margin-bottom: 2rem;
+}
+
+.faq-item h3 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
 
 /* About Sections */
 .about-hero {
@@ -740,7 +1170,7 @@ header nav > ul { display: none !important; }
     color: #e0e0e0;
 }
 
- .infrastructure, .team {
+.story, .vision-mission, .commitment, .infrastructure, .team {
     padding: 4rem 2rem;
     max-width: 800px;
     margin: 0 auto;
@@ -751,15 +1181,27 @@ header nav > ul { display: none !important; }
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
- .infrastructure:hover, .team:hover {
+.story:hover, .vision-mission:hover, .commitment:hover, .infrastructure:hover, .team:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
- .infrastructure h2, .team h2 {
+.story h2, .vision-mission h2, .commitment h2, .infrastructure h2, .team h2 {
     margin-bottom: 1rem;
     color: #FFD700;
     font-size: 1.5rem;
+}
+
+.story {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+}
+
+.vision-mission {
+    background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+}
+
+.commitment {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
 }
 
 .infrastructure {
@@ -826,9 +1268,114 @@ footer {
     }
 }
 
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    flex-wrap: wrap;
+}
+
 /* Gaming Offers Section */
+.gaming-offers {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.gaming-offers h2 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.gaming-offers p {
+    color: #e0e0e0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.plan-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    text-align: left;
+}
+
+.plan-card h3 {
+    color: #bb86fc;
+    margin-bottom: 0.5rem;
+}
+
+.plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.plan-card li {
+    color: #d0d0d0;
+    margin-bottom: 0.5rem;
+}
+
+.plan-card.evolved h3 { color: #FFD700; }
+
+.plan-card .cta-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.gaming-offers .note {
+    margin-top: 1rem;
+    color: #bdbdbd;
+    font-size: 0.95rem;
+    text-align: center;
+}
 
 /* Per-game offer layout */
+.game-offer {
+    background: linear-gradient(135deg, rgba(30,30,30,0.6) 0%, rgba(40,40,40,0.6) 100%);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #2b2b2b;
+}
+
+.game-offer h3 {
+    color: #FFD700;
+    margin: 0 0 0.75rem 0;
+}
+
+.offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.offer-grid .plan-card {
+    padding: 1rem;
+}
+
+.offer-grid .plan-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: #bb86fc;
+}
+
+.offer-grid .plan-card.evolved h4 { color: #FFD700; }
+
+@media (max-width: 900px) {
+    .offer-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* Contact page layout and form styles */
 .contact-hero {
@@ -993,11 +1540,73 @@ footer {
     line-height: 1.6;
 }
 
+.contact-form {
+    background: rgba(30,30,30,0.6);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+
+.contact-form h2 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+#contact-form label {
+    display: block;
+    margin-top: 0.6rem;
+    color: #ddd;
+    font-size: 0.95rem;
+}
+
+#contact-form input,
+#contact-form select,
+#contact-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.25rem;
+    background: #121212;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+#contact-form textarea { resize: vertical; }
+
+#contact-form button {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #bb86fc 0%, #FFD700 100%);
+    color: #121212;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     .contact-content {
         grid-template-columns: 1fr;
         padding: 0 1rem;
     }
+}
+
+.footer-section {
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
 }
 
 /* Index Page Modern Styles */
@@ -1277,9 +1886,17 @@ footer {
         font-size: 2rem;
     }
 
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+
     .pricing-cards {
         flex-direction: column;
         align-items: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
     }
 
     .features-grid,
@@ -1308,8 +1925,25 @@ footer {
         justify-content: flex-start;
     }
 
-    .gaming-plans h2 {
+    .gaming-plans h2,
+    .specifications h2 {
         font-size: 2rem;
+    }
+
+    .gaming-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .gaming-hero p {
+        font-size: 1.1rem;
+    }
+
+    .panel-features h2 {
+        font-size: 2rem;
+    }
+
+    .panel-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1366,6 +2000,24 @@ footer {
 }
 .service-group .vps-plans > .vps-card {
     flex: 0 1 320px;
+}
+
+.game-header {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.game-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-image {
+    transform: scale(1.05);
 }
 
 /* Banner used when no image files are available: gradient + title/subtitle */
@@ -1426,6 +2078,20 @@ footer {
     color: #fff;
 }
 
+.section-banner .banner-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #FFD700;
+    margin-bottom: 0.25rem;
+}
+
+.section-banner .banner-sub {
+    display: block;
+    color: #cfcfcf;
+    font-size: 0.95rem;
+}
+
 .section-banner .banner-emblem {
     position: absolute;
     top: 12px;
@@ -1458,6 +2124,18 @@ footer {
 }
 .game-banner .banner-inner {
     padding: 1rem 1.5rem;
+}
+.game-banner .banner-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #FFD700;
+    margin-bottom: 0.25rem;
+}
+.game-banner .banner-sub {
+    display: block;
+    color: #cfcfcf;
+    font-size: 0.95rem;
 }
 /* Per-game subtle gradient accents (fallbacks) */
 .game-banner[data-game="Rust"] { background: linear-gradient(90deg,#1f1a2b 0%, #2b1d2f 50%, rgba(255,215,0,0.08) 100%); }
@@ -1543,6 +2221,40 @@ footer {
     display: block;
 }
 
+.stock-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #4CAF50;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.custom .stock-badge {
+    background: #FFD700;
+    color: #121212;
+}
+
+.game-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    justify-content: center;
+}
+
+.game-specs span {
+    background: rgba(187, 134, 252, 0.1);
+    color: #bb86fc;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+}
+
 .gaming-features {
     padding: 4rem 2rem;
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -1589,6 +2301,18 @@ footer {
     line-height: 1.6;
 }
 
+.custom-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #FFD700 0%, #bb86fc 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1rem;
+}
+
 /* VPS Page Styles */
 .vps-hero {
     text-align: center;
@@ -1613,95 +2337,29 @@ footer {
 }
 
 .vps-plans {
-    /* Centered, predictable grid: columns have a controlled max width so
-       when there are few items (like a single 'Sur devis' card) the grid
-       doesn't stretch full-width and the cards stay centered. On wider
-       screens 3 columns will fit naturally within the max-width container. */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 320px));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* stretch children so cards in the same row have equal height */
     gap: 2rem;
-    justify-content: center; /* center the grid when total columns width < container */
-    justify-items: stretch;
-    align-items: stretch;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
-/* Center single plan card inside the grid: ensures a lone card ("Sur devis") is
-   visually centered beneath the banner. Uses grid alignment so it works with
-   the auto-fit layout and doesn't depend on :only-child margin hacks. */
-.vps-plans > .vps-card:only-child {
-    justify-self: center;
-    width: 320px; /* fixed width to match the grid column size used elsewhere */
-    max-width: 100%;
-}
-
-/* Stronger, page-scoped selectors for the gaming page to ensure the
-   single-card centering applies even if other stylesheets or caches
-   interfere. Uses !important to win against less-specific overrides. */
-.gaming-plans .vps-plans {
-    justify-content: center !important;
-}
-.gaming-plans .vps-plans > .vps-card:only-child {
-    justify-self: center !important;
-    width: 320px !important;
-}
-
-/* Page-specific override for the 'Autres' group on gaming page.
-   Use a simple flex centering here to guarantee the single card is centered
-   even if grid rules from other areas interfere. This targets the exact
-   section by id to avoid changing behavior globally. */
-.game-group#autres .vps-plans {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-}
-.game-group#autres .vps-plans > .vps-card {
-    width: 320px !important;
-    max-width: 100% !important;
-}
-
-/* Center small groups with two cards (Ark) by forcing a local flex layout
-   so the pair appears centered under the banner. Targets the Ark group only. */
-.game-group#ark .vps-plans {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    gap: 2rem !important;
-}
-.game-group#ark .vps-plans > .vps-card {
-    width: 320px !important;
-    max-width: 100% !important;
-}
-
-/* If a heading is placed inside the .vps-plans container, make it span
-   the entire grid so it doesn't consume a single grid cell and push
-   cards into unexpected rows. This preserves the '3 per row' layout. */
-.vps-plans > h2 {
-    grid-column: 1 / -1;
-    margin: 0 0 0.5rem 0;
-    align-self: start;
-}
-
 /* Pull the plans up so they overlap the banner; cards will appear above the banner */
 .vps-plans {
-    /* reduced negative margin so plans overlap the banner less and avoid visual crowding
-       on narrow viewports the overlap created layout issues for some users; a small
-       overlap keeps the visual style while preventing header/card collisions. */
-    margin-top: -40px;
-    padding-top: 12px; /* small buffer so cards don't hug the banner/header */
+    margin-top: -80px;
     position: relative;
     z-index: 2; /* ensure plans/cards sit above the banner */
 }
 
 .vps-plans > .vps-card {
-    /* grid children should be full width of their grid cell */
-    width: 100%;
+    flex: 0 1 320px; /* preferred width, but allow shrink on smaller screens */
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    height: auto;
+    height: auto; /* let flexbox compute row height */
 }
 .vps-plans > .vps-card { z-index: 3; position: relative; }
 
@@ -1719,7 +2377,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* keep CTA at bottom */
-    min-height: 360px; /* slightly reduced baseline height improves density without breaking layout */
+    min-height: 420px; /* baseline height for visual uniformity */
 }
 
 .vps-card::before {
@@ -1790,7 +2448,8 @@ footer {
         /* increased to give room for the badge + header on narrow viewports */
         padding-top: 1.5rem;
     }
-    .vps-card.popular .popular-badge {
+    .vps-card.popular .popular-badge,
+    .service-card.popular .popular-badge {
         /* place the badge in the normal flow above the header so it cannot overlap the title */
         position: static;
         display: block; /* allow margin:auto centering */
@@ -2061,6 +2720,47 @@ footer {
     padding: 0 2rem;
 }
 
+.service-card {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #333;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #bb86fc 0%, #FFD700 100%);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    border-color: #bb86fc;
+}
+
+.service-card.popular {
+    border-color: #FFD700;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.service-card.popular::before {
+    background: linear-gradient(90deg, #FFD700 0%, #bb86fc 100%);
+}
+
 .popular-badge {
     position: absolute;
     top: -12px;
@@ -2076,9 +2776,109 @@ footer {
     letter-spacing: 0.5px;
 }
 
+.service-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-header h3 {
+    color: #FFD700;
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
 .service-icon {
     font-size: 3rem;
     opacity: 0.9;
+}
+
+.service-description {
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.service-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(187, 134, 252, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+.feature-item .feature-icon {
+    font-size: 1.2rem;
+}
+
+.feature-item span:last-child {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+}
+
+.service-price {
+    margin-bottom: 2rem;
+}
+
+.service-price .price-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #bb86fc;
+}
+
+.service-price .price-period {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.service-price .price-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.service-card .cta-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #bb86fc 0%, #FFD700 100%);
+    color: #121212;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 auto;
+    display: block;
+}
+
+.service-card .cta-btn:hover {
+    background: linear-gradient(135deg, #a76bfa 0%, #e6c200 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(187, 134, 252, 0.4);
+}
+
+.service-card .cta-btn.secondary {
+    background: linear-gradient(135deg, #666 0%, #999 100%);
+    color: white;
+}
+
+.service-card .cta-btn.secondary:hover {
+    background: linear-gradient(135deg, #777 0%, #aaa 100%);
 }
 
 .services-features {
@@ -2174,21 +2974,36 @@ footer {
 }
 
 /* Ensure gaming page hero lines up with the plans grid */
-
-/* Card size responsiveness and final tweaks - grid based breakpoints */
-@media (min-width: 1000px) {
-    /* Desktop: stable three columns */
-    .vps-plans { grid-template-columns: repeat(3, 1fr); }
-}
-@media (min-width: 700px) and (max-width: 999px) {
-    /* Tablet / small desktop: two columns */
-    .vps-plans { grid-template-columns: repeat(2, 1fr); }
+.gaming-hero {
+    padding: 4rem 2rem 1.5rem; /* top/right/left padding to align with other sections */
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #ffffff;
 }
 
-@media (max-width: 699px) {
-    /* Small screens: single column grid and let cards size to content */
-    .vps-card { min-height: 0; }
-    .vps-plans { grid-template-columns: 1fr; }
+.gaming-hero p {
+    max-width: 900px;
+    margin-top: 0.5rem;
+    color: #d0d0d0;
+}
+
+/* Card size responsiveness and final tweaks */
+@media (max-width: 1100px) {
+    .vps-plans > .vps-card {
+        flex: 0 1 280px;
+    }
+}
+
+@media (max-width: 900px) {
+    /* stack cards vertically on small screens */
+    .vps-card {
+        min-height: 0;
+    }
+    /* keep two columns on narrow screens for better density (instead of forcing single column) */
+    .vps-plans > .vps-card {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
 }
 
 /* Optional: small visual tweak to group headers so cards look more uniform */
@@ -2210,13 +3025,13 @@ footer {
         gap: 0.75rem;
         margin: 0;
         padding: 0;
-        grid-template-columns: 1fr; /* ensure single-column on small screens */
     }
 
-    /* Ensure card fills grid cell (no flex-basis overrides) */
+    /* Force each plan/card to use full width on small screens */
     .service-group .vps-plans > .vps-card,
     .vps-plans > .vps-card {
-        width: 100% !important;
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
         box-sizing: border-box;
     }
 
@@ -2314,7 +3129,8 @@ footer {
 /* Final safety rule: force popular badges to be visually centered inside
    their card containers. This wins over other rules and is intentionally
    placed at the end of the stylesheet. */
-.vps-card.popular > .popular-badge {
+.vps-card.popular > .popular-badge,
+.service-card.popular > .popular-badge {
     display: inline-block !important;
     align-self: center !important;
     margin-left: auto !important;
@@ -2451,144 +3267,3 @@ footer {
     .legal-content { padding: 1rem; margin: 0.8rem; font-size: 1rem; line-height: 1.6; text-align: left; }
 }
 
-/* News items on blog */
-.news {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-.news h2 {
-    margin-bottom: 1rem;
-    color: var(--vel-primary);
-}
-.news-item {
-    background: var(--vel-surface);
-    padding: 1rem;
-    border-radius: var(--vel-radius-md);
-    margin-bottom: 1rem;
-}
-.news-date {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--vel-muted);
-    margin-bottom: 0.25rem;
-}
-
-/* Blog posts listing */
-.posts {
-    max-width: 1100px;
-    /* Reduced top margin to remove excessive gap above the cards */
-    margin: 1rem auto 2.5rem;
-    padding: 0 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    align-items: start;
-    /* allow rows to size naturally so the grid doesn't stretch and create vertical gaps */
-    grid-auto-rows: auto;
-    align-content: start;
-}
-.post-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
-    border: 1px solid rgba(255,255,255,0.03);
-    padding: 1.25rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.6);
-    color: var(--vel-text);
-    height: 100%; /* ensure equal height when grid-auto-rows is used */
-}
-.post-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.post-card h3 { margin: 0 0 0.5rem; }
-.post-card h3 a {
-    color: var(--vel-primary);
-    text-decoration: none;
-}
-.post-card h3 a:hover { color: var(--vel-accent); }
-.post-card p { color: var(--vel-muted); line-height: 1.6; }
-.post-card a { color: var(--vel-primary); font-weight: 700; }
-
-/* Make post cards more interactive and balanced */
-.post-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 36px rgba(0,0,0,0.65);
-}
-
-/* Read more button */
-.post-card .read-more {
-    display: inline-block;
-    margin-top: 0.75rem;
-    padding: 0.45rem 0.7rem;
-    background: linear-gradient(135deg, var(--vel-primary) 0%, var(--vel-accent) 100%);
-    color: #0b0b0d;
-    border-radius: 8px;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-/* Small improvements for readability and spacing inside post cards */
-.post-card ul {
-    margin: 0.6rem 0 0 1.1rem;
-    padding-left: 1rem;
-    list-style: disc;
-    color: var(--vel-muted);
-}
-.post-card li {
-    margin: 0.35rem 0;
-    line-height: 1.45;
-    color: var(--vel-muted);
-}
-.post-card li strong {
-    color: var(--vel-text);
-}
-
-/* Slightly increase contrast of body text inside cards for readability */
-.post-card p,
-.post-card .news-item p {
-    color: #d7d7d7; /* a touch brighter than --vel-muted */
-}
-
-/* Reduce the gap between section heading and grid and make sure heading stands out */
-.posts > h2 {
-    color: var(--vel-primary);
-    margin: 1rem 0 0.75rem 0;
-    font-size: 1.125rem;
-}
-
-/* Make cards slightly taller on desktop and tighten shadows so they don't appear heavy */
-@media (min-width: 1000px) {
-    .post-card { padding: 1.4rem; }
-    .post-card { box-shadow: 0 8px 18px rgba(0,0,0,0.55); }
-}
-
-/* Heading for posts section */
-.posts > h2 {
-    color: var(--vel-primary);
-    margin: 1.5rem 0 0.75rem 0;
-}
-
-/* Make the posts heading span the full grid width so it doesn't occupy a grid cell
-   and push the first card into the second column. This keeps the 3-column layout aligned. */
-.posts > h2 { grid-column: 1 / -1; }
-
-/* Force 3 columns on desktop for a cleaner grid */
-@media (min-width: 1000px) {
-    .posts { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* Tidy the hero on blog to match centered card look */
-.hero {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 2.25rem 2rem;
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-    box-shadow: 0 12px 28px rgba(0,0,0,0.6);
-}
-
-/* Improve spacing for the news section and center it visually */
-.news { max-width: 1000px; }
-.news .news-item { border-radius: 10px; padding: 1rem 1.1rem; }

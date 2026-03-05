@@ -5,13 +5,14 @@
   "scripts": {
     "images:generate": "node tools/image-gen.js",
     "lighthouse:audit": "lighthouse http://localhost:3000 --output=json --output-path=reports/lighthouse.json --chrome-flags='--headless' || true",
-  "build:js": "node tools/build.js"
+    "build:js": "node tools/build.js"
   },
   "dependencies": {
-    "sharp": "^0.32.0",
-    "lighthouse": "^11.0.0"
+    "lighthouse": "^11.0.0",
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
-    "esbuild": "^0.17.19"
+    "esbuild": "^0.17.19",
+    "purgecss": "^8.0.0"
   }
 }

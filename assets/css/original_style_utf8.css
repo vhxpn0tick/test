@@ -60,6 +60,25 @@ input {
 
 /* Accent helpers */
 
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(187, 134, 252, 0.3) 0%, rgba(255, 215, 0, 0.15) 50%, transparent 100%);
+    box-shadow: 0 0 30px rgba(187, 134, 252, 0.4);
+    animation: float 40s infinite ease-in-out, pulse 8s infinite ease-in-out;
+}
+
 @keyframes float {
     0% {
         transform: translateY(0px) rotate(0deg) translateX(0px);
@@ -91,6 +110,10 @@ input {
 
 /* Reduce heavy animated background on mobile and for users who prefer reduced motion
    This lowers CPU work & reduces layout shifts impacting Core Web Vitals. */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+    .animated-bg { display: none !important; }
+    .circle { animation: none !important; }
+}
 
 /* Login Button */
 .login-btn {
@@ -343,7 +366,7 @@ nav ul li a {
 
 /* Main Content */
 main {
-    /* Augmenté pour compenser la hauteur du header fixe sur petits et grands écrans */
+    /* Augment├® pour compenser la hauteur du header fixe sur petits et grands ├®crans */
     margin-top: 110px;
 }
 
@@ -351,7 +374,7 @@ main {
 .hero {
     background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
     color: white;
-    padding: 5rem 2rem 3rem; /* un peu plus d'espace en haut pour séparer du header */
+    padding: 5rem 2rem 3rem; /* un peu plus d'espace en haut pour s├®parer du header */
     text-align: center;
 }
 
@@ -624,6 +647,7 @@ img { max-width: 100%; height: auto; }
     }
 
     /* Ensure the animated background can't push content horizontally */
+    .animated-bg { left: 0; right: 0; width: 100vw; }
 
     /* Slightly reduce large h1 on tiny screens so it doesn't force layout issues */
     .services-hero h1 { font-size: 1.6rem; }
@@ -1613,95 +1637,29 @@ footer {
 }
 
 .vps-plans {
-    /* Centered, predictable grid: columns have a controlled max width so
-       when there are few items (like a single 'Sur devis' card) the grid
-       doesn't stretch full-width and the cards stay centered. On wider
-       screens 3 columns will fit naturally within the max-width container. */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 320px));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* stretch children so cards in the same row have equal height */
     gap: 2rem;
-    justify-content: center; /* center the grid when total columns width < container */
-    justify-items: stretch;
-    align-items: stretch;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
-/* Center single plan card inside the grid: ensures a lone card ("Sur devis") is
-   visually centered beneath the banner. Uses grid alignment so it works with
-   the auto-fit layout and doesn't depend on :only-child margin hacks. */
-.vps-plans > .vps-card:only-child {
-    justify-self: center;
-    width: 320px; /* fixed width to match the grid column size used elsewhere */
-    max-width: 100%;
-}
-
-/* Stronger, page-scoped selectors for the gaming page to ensure the
-   single-card centering applies even if other stylesheets or caches
-   interfere. Uses !important to win against less-specific overrides. */
-.gaming-plans .vps-plans {
-    justify-content: center !important;
-}
-.gaming-plans .vps-plans > .vps-card:only-child {
-    justify-self: center !important;
-    width: 320px !important;
-}
-
-/* Page-specific override for the 'Autres' group on gaming page.
-   Use a simple flex centering here to guarantee the single card is centered
-   even if grid rules from other areas interfere. This targets the exact
-   section by id to avoid changing behavior globally. */
-.game-group#autres .vps-plans {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-}
-.game-group#autres .vps-plans > .vps-card {
-    width: 320px !important;
-    max-width: 100% !important;
-}
-
-/* Center small groups with two cards (Ark) by forcing a local flex layout
-   so the pair appears centered under the banner. Targets the Ark group only. */
-.game-group#ark .vps-plans {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    gap: 2rem !important;
-}
-.game-group#ark .vps-plans > .vps-card {
-    width: 320px !important;
-    max-width: 100% !important;
-}
-
-/* If a heading is placed inside the .vps-plans container, make it span
-   the entire grid so it doesn't consume a single grid cell and push
-   cards into unexpected rows. This preserves the '3 per row' layout. */
-.vps-plans > h2 {
-    grid-column: 1 / -1;
-    margin: 0 0 0.5rem 0;
-    align-self: start;
-}
-
 /* Pull the plans up so they overlap the banner; cards will appear above the banner */
 .vps-plans {
-    /* reduced negative margin so plans overlap the banner less and avoid visual crowding
-       on narrow viewports the overlap created layout issues for some users; a small
-       overlap keeps the visual style while preventing header/card collisions. */
-    margin-top: -40px;
-    padding-top: 12px; /* small buffer so cards don't hug the banner/header */
+    margin-top: -80px;
     position: relative;
     z-index: 2; /* ensure plans/cards sit above the banner */
 }
 
 .vps-plans > .vps-card {
-    /* grid children should be full width of their grid cell */
-    width: 100%;
+    flex: 0 1 320px; /* preferred width, but allow shrink on smaller screens */
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    height: auto;
+    height: auto; /* let flexbox compute row height */
 }
 .vps-plans > .vps-card { z-index: 3; position: relative; }
 
@@ -1719,7 +1677,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* keep CTA at bottom */
-    min-height: 360px; /* slightly reduced baseline height improves density without breaking layout */
+    min-height: 420px; /* baseline height for visual uniformity */
 }
 
 .vps-card::before {
@@ -2175,20 +2133,23 @@ footer {
 
 /* Ensure gaming page hero lines up with the plans grid */
 
-/* Card size responsiveness and final tweaks - grid based breakpoints */
-@media (min-width: 1000px) {
-    /* Desktop: stable three columns */
-    .vps-plans { grid-template-columns: repeat(3, 1fr); }
-}
-@media (min-width: 700px) and (max-width: 999px) {
-    /* Tablet / small desktop: two columns */
-    .vps-plans { grid-template-columns: repeat(2, 1fr); }
+/* Card size responsiveness and final tweaks */
+@media (max-width: 1100px) {
+    .vps-plans > .vps-card {
+        flex: 0 1 280px;
+    }
 }
 
-@media (max-width: 699px) {
-    /* Small screens: single column grid and let cards size to content */
-    .vps-card { min-height: 0; }
-    .vps-plans { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+    /* stack cards vertically on small screens */
+    .vps-card {
+        min-height: 0;
+    }
+    /* keep two columns on narrow screens for better density (instead of forcing single column) */
+    .vps-plans > .vps-card {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
 }
 
 /* Optional: small visual tweak to group headers so cards look more uniform */
@@ -2210,13 +2171,13 @@ footer {
         gap: 0.75rem;
         margin: 0;
         padding: 0;
-        grid-template-columns: 1fr; /* ensure single-column on small screens */
     }
 
-    /* Ensure card fills grid cell (no flex-basis overrides) */
+    /* Force each plan/card to use full width on small screens */
     .service-group .vps-plans > .vps-card,
     .vps-plans > .vps-card {
-        width: 100% !important;
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
         box-sizing: border-box;
     }
 
@@ -2451,144 +2412,3 @@ footer {
     .legal-content { padding: 1rem; margin: 0.8rem; font-size: 1rem; line-height: 1.6; text-align: left; }
 }
 
-/* News items on blog */
-.news {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-.news h2 {
-    margin-bottom: 1rem;
-    color: var(--vel-primary);
-}
-.news-item {
-    background: var(--vel-surface);
-    padding: 1rem;
-    border-radius: var(--vel-radius-md);
-    margin-bottom: 1rem;
-}
-.news-date {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--vel-muted);
-    margin-bottom: 0.25rem;
-}
-
-/* Blog posts listing */
-.posts {
-    max-width: 1100px;
-    /* Reduced top margin to remove excessive gap above the cards */
-    margin: 1rem auto 2.5rem;
-    padding: 0 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    align-items: start;
-    /* allow rows to size naturally so the grid doesn't stretch and create vertical gaps */
-    grid-auto-rows: auto;
-    align-content: start;
-}
-.post-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
-    border: 1px solid rgba(255,255,255,0.03);
-    padding: 1.25rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.6);
-    color: var(--vel-text);
-    height: 100%; /* ensure equal height when grid-auto-rows is used */
-}
-.post-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.post-card h3 { margin: 0 0 0.5rem; }
-.post-card h3 a {
-    color: var(--vel-primary);
-    text-decoration: none;
-}
-.post-card h3 a:hover { color: var(--vel-accent); }
-.post-card p { color: var(--vel-muted); line-height: 1.6; }
-.post-card a { color: var(--vel-primary); font-weight: 700; }
-
-/* Make post cards more interactive and balanced */
-.post-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 36px rgba(0,0,0,0.65);
-}
-
-/* Read more button */
-.post-card .read-more {
-    display: inline-block;
-    margin-top: 0.75rem;
-    padding: 0.45rem 0.7rem;
-    background: linear-gradient(135deg, var(--vel-primary) 0%, var(--vel-accent) 100%);
-    color: #0b0b0d;
-    border-radius: 8px;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-/* Small improvements for readability and spacing inside post cards */
-.post-card ul {
-    margin: 0.6rem 0 0 1.1rem;
-    padding-left: 1rem;
-    list-style: disc;
-    color: var(--vel-muted);
-}
-.post-card li {
-    margin: 0.35rem 0;
-    line-height: 1.45;
-    color: var(--vel-muted);
-}
-.post-card li strong {
-    color: var(--vel-text);
-}
-
-/* Slightly increase contrast of body text inside cards for readability */
-.post-card p,
-.post-card .news-item p {
-    color: #d7d7d7; /* a touch brighter than --vel-muted */
-}
-
-/* Reduce the gap between section heading and grid and make sure heading stands out */
-.posts > h2 {
-    color: var(--vel-primary);
-    margin: 1rem 0 0.75rem 0;
-    font-size: 1.125rem;
-}
-
-/* Make cards slightly taller on desktop and tighten shadows so they don't appear heavy */
-@media (min-width: 1000px) {
-    .post-card { padding: 1.4rem; }
-    .post-card { box-shadow: 0 8px 18px rgba(0,0,0,0.55); }
-}
-
-/* Heading for posts section */
-.posts > h2 {
-    color: var(--vel-primary);
-    margin: 1.5rem 0 0.75rem 0;
-}
-
-/* Make the posts heading span the full grid width so it doesn't occupy a grid cell
-   and push the first card into the second column. This keeps the 3-column layout aligned. */
-.posts > h2 { grid-column: 1 / -1; }
-
-/* Force 3 columns on desktop for a cleaner grid */
-@media (min-width: 1000px) {
-    .posts { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* Tidy the hero on blog to match centered card look */
-.hero {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 2.25rem 2rem;
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-    box-shadow: 0 12px 28px rgba(0,0,0,0.6);
-}
-
-/* Improve spacing for the news section and center it visually */
-.news { max-width: 1000px; }
-.news .news-item { border-radius: 10px; padding: 1rem 1.1rem; }

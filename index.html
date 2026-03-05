@@ -15,10 +15,10 @@
     <!-- Preconnect to external purchase domain to speed up redirects to the shop -->
     <link rel="preconnect" href="https://achat.velaryonhosting.fr" crossorigin>
     <!-- Preload logo (critical small asset) -->
-    <link rel="preload" href="/Valeryon.png" as="image">
+    <link rel="preload" href="/assets/images/logo.png" as="image">
     <!-- Preload critical CSS to improve render start -->
-    <link rel="preload" href="assets/css/style.css" as="style">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
     <script src="assets/dist/bundle.js" defer></script>
     </head>
     <body>
@@ -26,7 +26,7 @@
         <nav>
             <div class="logo">
                 <a href="index.html">
-                    <img src="Valeryon.png" alt="Velaryon Hosting Logo" class="logo-img" width="40" height="40" loading="eager">
+                    <img src="/assets/images/logo.png" alt="Velaryon Hosting Logo" class="logo-img" width="40" height="40" loading="eager">
                     <span>Velaryon Hosting</span>
                 </a>
             </div>
@@ -38,6 +38,7 @@
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">À propos</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="https://discord.gg/8vhgVWgFGG" target="_blank" rel="noopener noreferrer" class="discord-link">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
@@ -50,7 +51,7 @@
 
     <main>
         <section class="hero">
-            <h1>Plus qu'un Hébergeur</h1>
+            <h1>Velaryon Hosting : Plus qu'un Hébergeur</h1>
             <p>Découvrez Velaryon Hosting, votre partenaire pour des solutions complètes : hébergement web , cloud privé sécurisé, VPS gaming et hébergement WordPress , Panel gaming. Des services premium à des prix abordables pour tous vos besoins technologiques.</p>
             <div class="hero-ctas">
                 <a href="services.html" class="cta-button primary">Commencer Maintenant</a>
@@ -60,6 +61,7 @@
 
         <section class="features">
             <h2>Pourquoi Choisir Velaryon Hosting ?</h2>
+            <p class="intro-text">Chez Velaryon Hosting, nous plaçons la performance, la sécurité et le support au cœur de chaque offre. Notre nom est synonyme de qualité depuis des années.</p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon" aria-hidden="true"></div>
@@ -174,7 +176,7 @@
                 </div>
                 <div class="pricing-card">
                     <h3>Hébergement WordPress Rapide</h3>
-                    <p class="price">À partir de 4.99€/mois</p>
+                    <p class="price">À partir of 4.99€/mois</p>
                     <ul>
                         <li>Optimisé WordPress</li>
                         <li>Mises à jour auto</li>
@@ -189,7 +191,7 @@
     <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <a href="index.html" class="footer-logo"><img src="Valeryon.png" alt="Velaryon Hosting" width="36" height="36"> <span>Velaryon Hosting</span></a>
+                <a href="index.html" class="footer-logo"><img src="/assets/images/logo.png" alt="Velaryon Hosting" width="36" height="36"> <span>Velaryon Hosting</span></a>
                 <p>Hébergement web performant et cloud privé sécurisé pour tous vos besoins.</p>
             </div>
             <div class="footer-links">

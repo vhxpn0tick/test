@@ -36,34 +36,49 @@ function sendFile(filePath, res) {
 
 const server = http.createServer((req, res) => {
   try {
-    // Normalize url
+    // Normalize url and strip query
     let urlPath = decodeURIComponent(req.url.split('?')[0]);
-    if (urlPath === '/') urlPath = '/index.html';
-    // Prevent directory traversal
-    const safePath = path.normalize(path.join(root, urlPath));
-    if (!safePath.startsWith(root)) {
-      res.writeHead(403);
-      res.end('Forbidden');
+
+    // Redirect explicit .html requests to extensionless path (SEO-friendly / consistent)
+    if (urlPath.endsWith('.html')) {
+      // map /index.html -> /
+      const target = urlPath === '/index.html' ? '/' : urlPath.replace(/\.html$/, '');
+      const qs = req.url.includes('?') ? '?' + req.url.split('?').slice(1).join('?') : '';
+      res.writeHead(301, { Location: target + qs });
+      res.end();
       return;
     }
 
-    // If path is a directory, serve index.html inside it
-    fs.stat(safePath, (err, stats) => {
-      if (!err && stats.isDirectory()) {
-        sendFile(path.join(safePath, 'index.html'), res);
+    // If root, serve index.html
+    if (urlPath === '/' || urlPath === '') {
+      sendFile(path.join(root, 'index.html'), res);
+      return;
+    }
+
+    // Prevent directory traversal
+    const safeBase = path.normalize(root + path.sep);
+    // Attempt candidates in order: exact path, path + .html, path/index.html
+    const candidates = [path.join(root, urlPath), path.join(root, urlPath + '.html'), path.join(root, urlPath, 'index.html')];
+
+    // Resolve and check each candidate
+    (function tryNext(i) {
+      if (i >= candidates.length) {
+        // fallback to index.html
+        sendFile(path.join(root, 'index.html'), res);
         return;
       }
-
-      // If the file doesn't exist, fallback to index.html (SPA-like)
-      fs.access(safePath, fs.constants.R_OK, (err) => {
-        if (err) {
-          // fallback to index.html
-          sendFile(path.join(root, 'index.html'), res);
-        } else {
-          sendFile(safePath, res);
-        }
+      const candidate = path.normalize(candidates[i]);
+      if (!candidate.startsWith(safeBase)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+      }
+      fs.access(candidate, fs.constants.R_OK, (err) => {
+        if (err) return tryNext(i + 1);
+        // found readable file
+        sendFile(candidate, res);
       });
-    });
+    })(0);
   } catch (e) {
     res.writeHead(500, { 'Content-Type': 'text/plain' });
     res.end('Server error');
